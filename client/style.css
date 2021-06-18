@@ -18,3 +18,14 @@ body{
 .nav-item:hover{
   background-color:white;
 }
+
+.introduction1{
+  text-align: center;
+  padding-top : 2%;
+}
+
+.introduction2{
+  text-align: center;
+  padding-bottom : 3%;
+}
+
