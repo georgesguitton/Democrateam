@@ -16,7 +16,8 @@ body{
 }
 /* NAVBAR */
 .nav-item:hover{
-  background-color:white;
+  background-color: #CECFCE;
+  opacity: 0.4;
 }
 
 .introduction{
@@ -24,4 +25,3 @@ body{
   padding-top : 2%;
   padding-bottom : 3%;
 }
-
