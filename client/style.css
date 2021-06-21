@@ -25,3 +25,21 @@ body{
   padding-top : 2%;
   padding-bottom : 3%;
 }
+/* CONTACT */
+.form-control{
+  margin-top: 3%;
+}
+.logo-contact {
+  margin : 2%;
+}
+.titre-contact{
+  margin-top : 5%;
+}
+.btn-contact{
+  margin-top : 3%;
+  margin-left: auto;
+}
+
+.test {
+  padding: 3%;
+}
