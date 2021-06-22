@@ -1,91 +1,66 @@
 <!doctype html>
 <html lang="fr">
 
-<head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <head>
+      <!-- Required meta tags -->
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+      <!-- Bootstrap CSS -->
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-    <link rel="stylesheet" href="./style.css">
+      <link rel="stylesheet" href="./style.css">
+      <link rel="stylesheet" href="./ege.css">
 
-    <title>Page basique de forme du site</title>
-</head>
+      <!-- Load Vue followed by Vue Router -->
+      <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/http-vue-loader/src/httpVueLoader.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/vue-router/dist/vue-router.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
-<body>
+      <title>Page basique de forme du site</title>
+  </head>
 
-    <!--NAVBAR STICKY TOP -->
-    <div class="container-fluid sticky-top no-padding">
-        <div class="col-12 no-padding">
-            <nav class="navbar navbar-expand-lg navbar-light bg-light little-padding">
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                    <div class="container-fluid navbar-nav text-center align-items-center">
+  <body>
+    <div id="app">
+      <!--NAVBAR STICKY TOP -->
+      <div class="container-fluid sticky-top no-padding">
+          <div class="col-12 no-padding">
+              <nav class="navbar navbar-expand-lg navbar-light bg-light little-padding">
+                  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+                  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                      <div class="container-fluid navbar-nav text-center align-items-center">
 
-                        <a class="navbar-brand col-lg-2 no-padding no-margin" href="index.html">
-                            <img src="./images/Logo_sb.png" height="65" alt="Logo du site 'Democrateam'">
-                        </a>
+                          <router-link class="navbar-brand col-lg-2 no-padding no-margin" to="/">
+                              <img src="./images/Logo_sb.png" height="65" alt="Logo du site 'Democrateam'">
+                          </router-link>
 
-                        <a class="col-lg-2 nav-item nav-link active" href="index.html">Accueil<span class="sr-only">(current)</span></a>
-                        <a class="col-lg-2 nav-item nav-link" href="listeElections.html">Liste des élections</a>
-                        <a class="col-lg-2 nav-item nav-link" href="creerElection.html">Créer une élection</a>
-                        <a class="col-lg-2 nav-item nav-link" href="contact.html">Contact</a>
-                        <a class="col-lg-2 nav-item nav-link" href="login.html">Connexion</a>
-                    </div>
-                </div>
-            </nav>
-        </div>
-    </div>
-    <!-- END OF THE NAVBAR -->
+                          <router-link class="col-lg-2 nav-item nav-link active" to="/">Accueil<span class="sr-only">(current)</span></router-link>
+                          <router-link class="col-lg-2 nav-item nav-link" to="/listeElections">Liste des élections</router-link>
+                          <router-link class="col-lg-2 nav-item nav-link" to="/creerElection">Créer une élection</router-link>
+                          <router-link class="col-lg-2 nav-item nav-link" to="/contact">Contact</router-link>
+                          <router-link class="col-lg-2 nav-item nav-link" to="/login">Connexion</router-link>
+                      </div>
+                  </div>
+              </nav>
+          </div>
+      </div>
+      <!-- END OF THE NAVBAR -->
 
-    <div class="container-fluid">
+        <main>
+          <router-view></router-view>
+        </main>
+  </div>
+  <script src="/vue-application.js"></script>
 
-        <div class="p-md-5 p-2 mb-4 bg-light rounded-3">
-            <div class="container-fluid py-5">
-                <h2> Bienvenue sur Democrateam </h2>
-                <p class="col-md-8 fs-4">
-                    La plateforme de vote à distance fiable et sécurisée.
-                </p>
-            </div>
-        </div>
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
-
-
-        <div class="row align-items-md-stretch">
-            <div class="col-md-6">
-                <div class="h-100 p-md-5 p-2 text-white bg-dark rounded-3">
-                    <h2 class="text-justify col-12"> Voter à une élection </h2>
-                    <p class="text-justify col-12">
-                        &bull; Une fois connecté à la plateforme, rendez vous sur la page de la liste des élections.<br> &bull; Sélectionner alors l'élection à laquelle vous souhaitez voter et appuyer sur le bouton "Voter".<br> &bull; Renseignez alors
-                        votre choix de candidat puis valider le.<br> &bull; Voilà, votre vote a été soumis.
-                    </p>
-                    <button class="btn btn-outline-light" type="button"><router-link to=""> Liste des élections </router-link>  </button>
-                </div>
-            </div>
-
-            <div class="col-md-6">
-                <div class="h-100 p-md-5 p-2 bg-light border rounded-3">
-                    <h2 class="text-justify col-12"> Créer une élection </h2>
-                    <p class="text-justify col-12">
-                        &bull; Une fois connecté à la plateforme, rendez vous sur la page de création d'élection.<br> &bull; Renseignez alors les informations des candidats à l'élection ainsi que la liste des votant.<br> &bull; Validez votre l'élection.<br>                        &bull; Voilà, votre élection a été créée.
-                    </p>
-                    <button class="btn btn-outline-secondary" type="button"><router-link to=""> Créer une élection <router-link></button>
-                </div>
-            </div>
-
-        </div>
-    </div>
-
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-
-</body>
+  </body>
 
 </html>
