@@ -168,3 +168,22 @@ body {
 #login .row {
     width: 100%;
 }
+
+/* CREER_ELECTION */
+
+.creer_election{
+    margin-left: 20%;
+    margin-right: 20%;
+}
+
+.btn-ajouter_candidat{
+    display: table;
+    margin: 0 auto;
+    width: 50%;
+}
+
+.btn-valider_election{
+    display: table;
+    margin: 0 auto;
+    width: 40%;
+}

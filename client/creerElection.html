@@ -11,7 +11,7 @@
 
     <link rel="stylesheet" href="./style.css">
 
-    <title>Democrateam - Connexion</title>
+    <title>Democrateam - Créer une élection</title>
 </head>
 
 <body>
@@ -41,29 +41,43 @@
         </div>
     </div>
     <!-- END OF THE NAVBAR -->
-    <section id="login" class="container col-12">
-        <div class="row justify-content-center">
+    <section id="creerElection" class="container col-12">
+        <div class="creer_election">
             <div id="container" class="col-md-auto">
-                <!-- zone de connexion -->
+                <!-- zone de création d'élection -->
 
-                <form class="card">
-                    <h1>Connexion</h1>
-
-                    <div class="form-group">
-                        <label>Nom d'utilisateur ou E-mail</label>
-                        <input type="text" placeholder="Entrer le nom d'utilisateur" name="username" required />
-                    </div>
+                <form class="form_creer_election">
+                    <h2 style="text-align: center;">Créer votre élection</h2>
+                    <br>
 
                     <div class="form-group">
-                        <label>Mot de passe</label>
-                        <input type="password" placeholder="Entrer le mot de passe" name="password" required />
+                        <label>Nom de votre élection : </label>
+                        <input type="text" style="width: 75%;" placeholder="Entrez le nom de l'élection" name="nom_election" required />
+                    </div>
+                    <br>
+
+                    <h3 style="text-align: center;">Enregistrer les candidats</h3>
+                    <br>
+
+                    <div class="form-group">
+                        <label>Nom du candidat :</label>
+                        <input type="text" style="width: 80%;" placeholder="Entrez le nom du candidat" name="nom_candidat"/>
                     </div>
 
-                    <div>
-                        <p id="errorLogInMessage"></p>
+                    <div class="form-group">
+                        <label>Description du candidat :</label>
+                        <textarea rows="5" style="width: 100%;" type="text" placeholder="Entrez la description du candidat" name="description_candidat"></textarea>
                     </div>
 
-                    <button class="btn btn-primary btn-login" id="envoyer-form" type="submit">Connexion</button>
+                    <div class="form-group">
+                        <label>Image :</label>
+                        <input type="text" style="width: 91%;" placeholder="Entrez l'image du candidat" name="image_candidat"/>
+                    </div>
+
+                    <button class="btn btn-primary btn-ajouter_candidat" id="ajouter_candidat" type="submit">Ajouter le candidat</button>
+                    <br><br>
+
+                    <button class="btn btn-primary btn-valider_election" id="valider_election" type="submit">Valider l'élection</button>
                 </form>
             </div>
         </div>
