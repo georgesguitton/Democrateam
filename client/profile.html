@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="fr">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="./style.css">
+
+    <title>Democrateam - Profil</title>
+</head>
+
+<body>
+
+    <!--NAVBAR STICKY TOP -->
+    <div class="container-fluid sticky-top no-padding">
+        <div class="col-12 no-padding">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light little-padding">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                    <div class="container-fluid navbar-nav text-center align-items-center">
+
+                        <a class="navbar-brand col-lg-2 no-padding no-margin" href="index.html">
+                            <img src="./images/Logo_sb.png" height="65" alt="Logo du site 'Democrateam'">
+                        </a>
+
+                        <a class="col-lg-2 nav-item nav-link active" href="index.html">Accueil<span
+                                class="sr-only">(current)</span></a>
+                        <a class="col-lg-2 nav-item nav-link" href="listeElections.html">Liste des élections</a>
+                        <a class="col-lg-2 nav-item nav-link" href="">Créer une élection</a>
+                        <a class="col-lg-2 nav-item nav-link" href="contact.html">Contact</a>
+                        <a class="col-lg-2 nav-item nav-link" href="login.html">Connexion</a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+    <!-- END OF THE NAVBAR -->
+
+    <div class="container-fluid">
+
+        <div class="p-2 mb-4 bg-light rounded-3">
+            <div class="container-fluid py-5">
+                <div class="container d-flex">
+                    <img class="rounded-circle z-depth-1 col-2 d-sm-none d-md-block" src="./images/pp.jpg">
+                    <h2 class="col-10 col-md-8 fs-4 d-flex align-items-center">
+                        Bienvenue, #name# !
+                    </h2>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="row align-items-md-stretch">
+            <div class="col-lg-6">
+                <div class="h-100 p-md-5 p-2 bg-light">
+                    <h2 class="text-justify col-12"> Mes informations </h2>
+                    <form class="col-12">
+                        <div class="form-group">
+                            <label for="userid">Identifiant</label>
+                            <input type="text" class="form-control" id="userid" aria-describedby="userid" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label for="userlastname">Nom</label>
+                            <input type="text" class="form-control" id="userlastname">
+                        </div>
+                        <div class="form-group">
+                            <label for="userfirstname">Prénom</label>
+                            <input type="text" class="form-control" id="userfirstname">
+                        </div>
+                        <div class="form-group">
+                            <label for="useremail">E-mail</label>
+                            <input type="text" class="form-control" id="useremail">
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="h-100 p-md-5 p-2 bg-light">
+                    <h2 class="text-justify col-12 d-none d-lg-block">Mot de passe</h2>
+                    <form class="col-12">
+                        <div class="form-group">
+                            <label for="currentpassword">Ancien mot de passe</label>
+                            <input type="password" class="form-control" id="currentpassword" aria-describedby="currentpassword" placeholder="Entrez le mot de passe actuel">
+                        </div>
+                        <div class="form-group">
+                            <label for="newpassword">Nouveau mot de passe</label>
+                            <input type="password" class="form-control" id="newpassword" placeholder="Entrez votre nouveau mot de passe">
+                        </div>
+                        <div class="form-group">
+                            <label for="confirmpassword">Confirmation mot de passe</label>
+                            <input type="password" class="form-control" id="confirmpassword" placeholder="Confirmez votre nouveau mot de passe">
+                        </div>
+                        <div class="form-group">
+                            <button id="sendpassword" type="submit" class="btn btn-primary">Modifier le mot de passe</button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+</body>
+
+</html>
