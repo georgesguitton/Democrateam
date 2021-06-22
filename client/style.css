@@ -176,6 +176,11 @@ body {
     margin-right: 20%;
 }
 
+.form_content{
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
 .btn-ajouter_candidat{
     display: table;
     margin: 0 auto;
