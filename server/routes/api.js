@@ -3,6 +3,16 @@ const router = express.Router()
 
 const bcrypt = require('bcrypt')
 
+const con = require('../init-db.js')
+
+router.get('/', (req, res) => res.send('Hello World!'))
+
+router.get('/user', async (req, res) => {
+  const result = await con.query('SELECT * FROM utilisateur', function (error, results, fields) {
+    res.json(results)
+  })
+})
+
 /**
  * Cette route permet de se connecter.
  */
