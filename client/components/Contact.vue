@@ -1,16 +1,17 @@
 <template>
-  <div class="container col-12 test">
+  <div class="container col-12 contact-div">
       <div class="row">
-          <div class="col-6" style="border: solid black">
+          <div class="col-md-6" id="div1">
               <h2 class="titre-contact">Bienvenue sur Democrateam</h2>
-              <img class="logo-contact" src="../images/logo_sb.png" width="20%">
-
-              <p>Vous rencontrez un problème avec le site, vous voulez nous faire votre retour d'expérience ? Ici vous pouvez écrire un mail qui sera traité dans les plus brefs délais par notre équipe de modération.
+              <p class="text-contact">Vous rencontrez un problème avec le site, vous voulez nous faire votre retour d'expérience ? Ici vous pouvez écrire un mail qui sera traité dans les plus brefs délais par notre équipe de modération.<br><br>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nunc nulla, fringilla sed pretium eu, eleifend vitae felis. Fusce blandit est ut enim eleifend luctus. Nunc at semper dolor. Donec in nulla pellentesque, elementum diam vel, faucibus felis. Donec sed nulla eros. Integer laoreet sollicitudin finibus. Cras non tempus mi. Ut luctus nisl eu condimentum imperdiet. In gravida, augue id auctor pulvinar, felis ex dapibus turpis, sed tincidunt nunc erat id nulla. Aenean pharetra nibh finibus interdum pharetra. Maecenas enim est, facilisis at eleifend eget, viverra sit amet tortor.<br><br>
+              Duis vitae velit posuere, vestibulum nisl non, rutrum nisl. Praesent facilisis volutpat magna vitae pretium. Curabitur sapien nulla, ultrices in ex vel, luctus tristique velit. Donec ut molestie odio. Sed vehicula nisi a sapien varius suscipit. Vivamus hendrerit leo quis sagittis condimentum. Mauris odio felis, lobortis ut posuere congue, finibus vitae urna. In accumsan ultrices venenatis. Nunc feugiat placerat nisi eu interdum. Maecenas ut odio vulputate, volutpat lectus in, tincidunt purus. Aliquam ac porta tellus.
               </p>
           </div>
-          <div class="col-6" style="border: solid black">
-              <form method="post" action="">
-                  <div class="form-group">
+          <div class="col-md-6" id="div2">
+            <h2 class="titre-contact">Votre mail</h2>
+            <form method="post" action="">
+              <div class="form-group">
                       <input class="form-control" type="text" name="objet" placeholder="Objet du mail" size="50" id="objet" required>
                   </div>
                   <div class="form-group">
@@ -20,5 +21,8 @@
               </form>
           </div>
       </div>
+    <div>
+      <img class="img-fluid" src="../images/service_client.png">
+    </div>
   </div>
 </template>
