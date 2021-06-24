@@ -33,5 +33,38 @@
               </div>
           </div>
       </div>
+
+      <div>
+        <h3>Elections auxquelles vous pouvez participer</h3>
+        <div class= "row">
+          <div v-for="election in elections" :key="election.idElection" class="col-lg-4 col-12" @click="test()">
+              <div class="hover hover-2 text-white rounded"><img src="../images/Box.png" alt="">
+                  <div class="hover-overlay"></div>
+                  <div class="hover-2-content px-5 py-4">
+                      <h3 class="hover-2-title text-uppercase font-weight-bold mb-0"> {{election.titre}}</h3>
+                      <p class="hover-2-description text-uppercase mb-0"> {{election.description}} </p>
+                  </div>
+              </div>
+          </div>
+        </div>
+      </div>
   </div>
 </template>
+
+<script>
+module.exports = {
+  props: {
+    elections: { type: Array, default: [] }
+  },
+  data (){
+    return{
+
+    }
+  },
+  methods: {
+    test (){
+      alert("Ok")
+    }
+  }
+}
+</script>

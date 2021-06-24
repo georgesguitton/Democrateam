@@ -24,11 +24,15 @@ var app = new Vue({
     router,
     el: '#app',
     data: {
+        elections: [],
         user: {},
         connected: false
     },
     async mounted() {
-
+      // Test recup toutes les elections
+      const res = await axios.get('/api/elections')
+      this.elections = res.data
+      //Fin test
     },
     methods: {
         async logIn(user) {

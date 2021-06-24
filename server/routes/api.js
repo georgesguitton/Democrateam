@@ -5,13 +5,15 @@ const bcrypt = require('bcrypt')
 
 const con = require('../init-db.js')
 
+/* --- TEST CONNECTION BD */
 router.get('/', (req, res) => res.send('Hello World!'))
 
-router.get('/user', async (req, res) => {
-  const result = await con.query('SELECT * FROM utilisateur', function (error, results, fields) {
+router.get('/elections', async (req, res) => {
+  const result = await con.query('SELECT * FROM election', function (error, results, fields) {
     res.json(results)
   })
 })
+/* --- FIN TEST */
 
 /**
  * Cette route permet de se connecter.
