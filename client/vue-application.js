@@ -3,6 +3,7 @@ const ListeElections = window.httpVueLoader('./components/ListeElections.vue')
 const Contact = window.httpVueLoader('./components/Contact.vue')
 const CreerElection = window.httpVueLoader('./components/CreerElection.vue')
 const Login = window.httpVueLoader('./components/Login.vue')
+const Register = window.httpVueLoader('./components/Register.vue')
 const PageElection = window.httpVueLoader('./components/PageElection.vue')
 const Profil = window.httpVueLoader('./components/Profil.vue')
 const Thankyou = window.httpVueLoader('./components/Thankyou.vue')
@@ -16,6 +17,7 @@ const routes = [
     { path: '/pageElection', component: PageElection },
     { path: '/profil', component: Profil },
     { path: '/thankyou', component: Thankyou },
+    { path: '/register', component: Register },
 ]
 
 const router = new VueRouter({
