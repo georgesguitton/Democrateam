@@ -11,7 +11,7 @@
         <div class="divider-custom-line"></div>
       </div>
       <!-- Masthead Avatar Image-->
-      <img src="https://th.bing.com/th/id/R4df180105dc4bea229839cf0ce8d85dd?rik=99BXfH9QgMRlzA&pid=ImgRaw" />
+      <img src="https://th.bing.com/th/id/R4df180105dc4bea229839cf0ce8d85dd?rik=99BXfH9QgMRlzA&pid=ImgRaw" class="col-md-8" />
       <!-- Icon Divider-->
       <div class="divider-custom divider-light">
         <div class="divider-custom-line"></div>
@@ -127,3 +127,32 @@
   </section>
 </div>
 </template>
+<script>
+module.exports = {
+  props: {
+    elections: { type: Array, default: [] },
+    election: { type: Object }
+  },
+  data () {
+    return {
+    }
+  },
+  async mounted () {
+  },
+  methods: {
+    getElections (electionsId) {
+      this.$emit('getElections')
+    },
+    getElection (electionId) {
+      this.$emit('getElection')
+    }
+  }
+}
+
+
+
+
+
+
+
+</script>

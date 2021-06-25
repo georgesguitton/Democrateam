@@ -20,7 +20,7 @@
                       &bull; Une fois connecté à la plateforme, rendez vous sur la page de la liste des élections.<br> &bull; Sélectionner alors l'élection à laquelle vous souhaitez voter et appuyer sur le bouton "Voter".<br> &bull; Renseignez alors
                       votre choix de candidat puis valider le.<br> &bull; Voilà, votre vote a été soumis.
                   </p>
-                  <button class="btn btn-outline-light" type="button"><router-link to=""> Liste des élections </router-link>  </button>
+                  <button class=" btn-black " type="button"> Liste des élections   </button>
               </div>
           </div>
 
@@ -30,10 +30,11 @@
                   <p class="text-justify col-12">
                       &bull; Une fois connecté à la plateforme, rendez vous sur la page de création d'élection.<br> &bull; Renseignez alors les informations des candidats à l'élection ainsi que la liste des votant.<br> &bull; Validez votre l'élection.<br>                        &bull; Voilà, votre élection a été créée.
                   </p>
-                  <button class="btn btn-outline-secondary" type="button"><router-link to=""> Créer une élection <router-link></button>
+                  <button class=" btn-white " type="button">Créer une élection </button>
               </div>
           </div>
 
       </div>
   </div>
 </template>
+

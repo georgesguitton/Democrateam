@@ -20,15 +20,25 @@ const router = new VueRouter({
   routes
 })
 
-var app = new Vue({
+const app = new Vue({
   router,
   el: '#app',
   data: {
-    user: {}
+    user: {},
+    elections:[],
+    election: {}
   },
   async mounted () {
 
   },
   methods: {
+    async getElections (electionsId) {
+      await axios.post('/api/getElections')
+
+    },
+    async getElection (electionId) {
+      await axios.post('/api/getElections')
+
+    },
   }
 })
