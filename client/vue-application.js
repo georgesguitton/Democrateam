@@ -24,21 +24,27 @@ const app = new Vue({
   router,
   el: '#app',
   data: {
+    elections: [],
+    election: {
+      info:[],
+      candidat: []
+    },
     user: {},
-    elections:[],
-    election: {}
+    connected: false
   },
   async mounted () {
+    // Test recup toutes les elections
+    const res = await axios.get('/api/elections')
+    this.elections = res.data
+    //Fin test
 
   },
   methods: {
-    async getElections (electionsId) {
-      await axios.post('/api/getElections')
-
-    },
-    async getElection (electionId) {
-      await axios.post('/api/getElections')
-
+    async getElection (id) {
+      const res = await axios.get('/api/getElection/'+id)
+      this.election.info = this.elections.find(election => election.idElection === id)
+      this.election.candidat = res.data
+      this.$router.push('PageElection')
     },
   }
 })
