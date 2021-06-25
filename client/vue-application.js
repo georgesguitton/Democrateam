@@ -7,44 +7,69 @@ const PageElection = window.httpVueLoader('./components/PageElection.vue')
 const Profil = window.httpVueLoader('./components/Profil.vue')
 
 const routes = [
-  { path: '/', component: Home },
-  { path: '/listeElections', component: ListeElections },
-  { path: '/contact', component: Contact },
-  { path: '/creerElection', component: CreerElection },
-  { path: '/login', component: Login },
-  { path: '/pageElection', component: PageElection },
-  { path: '/profil', component: Profil },
+    { path: '/', component: Home },
+    { path: '/listeElections', component: ListeElections },
+    { path: '/contact', component: Contact },
+    { path: '/creerElection', component: CreerElection },
+    { path: '/login', component: Login },
+    { path: '/pageElection', component: PageElection },
+    { path: '/profil', component: Profil },
 ]
 
 const router = new VueRouter({
-  routes
+    routes
 })
 
 const app = new Vue({
-  router,
-  el: '#app',
-  data: {
-    elections: [],
-    election: {
-      info:[],
-      candidat: []
+    router,
+    el: '#app',
+    data: {
+        elections: [],
+        election: {
+            info: [],
+            candidat: []
+        },
+        user: {},
+        connected: false
     },
-    user: {},
-    connected: false
-  },
-  async mounted () {
-    // Test recup toutes les elections
-    const res = await axios.get('/api/elections')
-    this.elections = res.data
-    //Fin test
+    async mounted() {
+        // Test recup toutes les elections
+        const res = await axios.get('/api/elections')
+        this.elections = res.data
+            //Fin test
 
-  },
-  methods: {
-    async getElection (id) {
-      const res = await axios.get('/api/getElection/'+id)
-      this.election.info = this.elections.find(election => election.idElection === id)
-      this.election.candidat = res.data
-      this.$router.push('PageElection')
     },
-  }
+    methods: {
+        async getElection(id) {
+            const res = await axios.get('/api/getElection/' + id)
+            this.election.info = this.elections.find(election => election.idElection === id)
+            this.election.candidat = res.data
+            this.$router.push('PageElection')
+        },
+        async logIn(user) {
+            const userTeam = await axios.post('/api/login/', user)
+                .catch(function(error) {
+                    if (error.response.status === 400 || error.response.status === 401) {
+                        document.getElementById('errorLogInMessage').innerHTML = "La combinaison est incorrecte.";
+                        return error.response;
+                    }
+                })
+            if (userTeam.status === 200) {
+                this.team = userTeam.data;
+                this.connected = true;
+                router.push('/')
+            }
+        },
+        async logOut() {
+            if (await axios.post('/api/logout/')
+                .catch(function(error) {
+                    if (error.response.status === 400 || error.response.status === 401) {
+                        console.log(error)
+                    }
+                })) {
+                this.connected = false;
+                router.push('/')
+            }
+        }
+    }
 })

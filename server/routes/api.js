@@ -8,19 +8,19 @@ const con = require('../init-db.js')
 /* --- TEST CONNECTION BD */
 router.get('/', (req, res) => res.send('Hello World!'))
 
-router.get('/elections', async (req, res) => {
-  const result = await con.query('SELECT * FROM election', function (error, results, fields) {
-    res.json(results)
-  })
+router.get('/elections', async(req, res) => {
+    const result = await con.query('SELECT * FROM election', function(error, results, fields) {
+        res.json(results)
+    })
 })
 
-router.get('/getElection/:id' , async (req, res) =>{
-  const id = parseInt(req.params.id)
-  const result = await con.query("SELECT * FROM Choix WHERE idElection=?",[id], function (error, results, fields) {
-    res.json(results)
-  })
-})
-/* --- FIN TEST */
+router.get('/getElection/:id', async(req, res) => {
+        const id = parseInt(req.params.id)
+        const result = await con.query("SELECT * FROM Choix WHERE idElection=?", [id], function(error, results, fields) {
+            res.json(results)
+        })
+    })
+    /* --- FIN TEST */
 
 /**
  * Cette route permet de se connecter.
