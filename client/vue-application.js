@@ -73,8 +73,5 @@ const app = new Vue({
                 router.push('/')
             }
         },
-        async retourAccueil() {
-                router.push('/')
-            }
     }
 })
