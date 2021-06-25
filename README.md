@@ -10,6 +10,7 @@ Summary
 
 
 Global description
+
 Democration is a Web Application that allows its users to create or participate in an election in a safe and secure way.
 
 To design and develop this application we used :
