@@ -1,5 +1,6 @@
 <template>
 <div>
+  <navbar :connected="connected" @log-out="logOut"></navbar>
   <header class="masthead bg-primary text-white text-center">
     <div class="container d-flex align-items-center flex-column">
       <!-- Masthead Heading-->
@@ -128,8 +129,13 @@
 </div>
 </template>
 <script>
+const Navbar = window.httpVueLoader("./components/Navbar.vue");
 module.exports = {
+  components: {
+    Navbar,
+  },
   props: {
+    connected: { type: Boolean },
     elections: { type: Array, default: [] },
     election: { type: Object }
   },
@@ -140,6 +146,12 @@ module.exports = {
   async mounted () {
   },
   methods: {
+    logIn() {
+      this.$emit("log-in", this.user);
+    },
+    logOut () {
+      this.$emit('log-out')
+    },
     getElections (electionsId) {
       this.$emit('getElections')
     },
@@ -148,11 +160,4 @@ module.exports = {
     }
   }
 }
-
-
-
-
-
-
-
 </script>
