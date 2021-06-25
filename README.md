@@ -18,7 +18,8 @@ To design and develop this application we used :
 - Visual paradigm
 - Excel
 - Moqups
-with the following technologies :
+
+With the following technologies :
 - HTML/CSS
 - VueJS
 - NodeJS
