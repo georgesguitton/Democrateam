@@ -10,15 +10,19 @@
           </p>
         </div>
         <div class="col-md-6" id="div2">
-          <h2 class="titre-contact">Votre mail</h2>
-          <form method="post" action="">
+          <h2 class="titre-contact">Écrivez-nous !</h2>
+          <form action="https://formsubmit.co/democrateam@yopmail.com" method="POST">
+            <div class="form-group">
+              <input class="form-control" type="text" name="mail" placeholder="Votre mail" size="50" id="mail" required>
+            </div>
             <div class="form-group">
               <input class="form-control" type="text" name="objet" placeholder="Objet du mail" size="50" id="objet" required>
             </div>
             <div class="form-group">
               <textarea class="form-control" type="text" name="corps" placeholder="Écrivez votre requête ici" rows="10" cols="100" id="corps" required></textarea>
             </div>
-            <button class="btn btn-primary btn-contact" id="envoyer-form" type="submit">Envoyer</button>
+            <input type="hidden" name="_captcha" value="false">
+            <button class="btn btn-contact" id="envoyer-form" type="submit">Envoyer</button>
           </form>
         </div>
       </div>
