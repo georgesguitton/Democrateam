@@ -29,25 +29,20 @@ router.post('/login', async(req, res) => {
     const username = req.body.username.toLowerCase();
     const password = req.body.password
 
-    const sqlUser = "SELECT * FROM users WHERE email=$1 OR username =$1"
-    const checkExists = await client.query({ // notez le "await" car la fonction est asynchrone
-        text: sqlUser,
-        values: [username]
+    await con.query('SELECT * FROM utilisateur WHERE emailPerso="' + username + '" OR emailPro ="' + username + '"', async function(error, results, fields) {
+        if (results[0] == null) {
+            res.status(400).json({ message: 'user doesn\'t exists' });
+            return
+        }
+
+        if (await bcrypt.compare(password, results[0].mdp)) {
+            req.session.userId = results.rows[0].id
+                // on envoie l'id du user au client.
+            return res.json(req.session.userId)
+        } else {
+            return res.status(401).json({ message: 'wrong password' })
+        }
     })
-
-    if (checkExists.rowCount === 0) {
-        res.status(400).json({ message: 'user doesn\'t exists' });
-        return
-    }
-
-    if (await bcrypt.compare(password, checkExists.rows[0].password)) {
-        req.session.userId = checkExists.rows[0].id
-            // on envoie l'id du user au client.
-        return res.json(req.session.userId)
-    } else {
-        return res.status(401).json({ message: 'wrong password' })
-
-    }
 })
 
 
@@ -62,8 +57,6 @@ router.post('/logout', (req, res) => {
         req.session.destroy();
         return res.status(200).json({ message: 'user disconnected' })
     }
-
-
 })
 
 module.exports = router
