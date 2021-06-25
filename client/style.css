@@ -70,6 +70,27 @@ body {
     background: linear-gradient(to left, rgba(226, 25, 55,0.4), rgba(0, 0, 0, 0.1));
 }
 
+/* ThankYou page */
+
+.divTy {
+    color: white;
+    background: gray;
+    padding: 15px;
+    position: absolute;
+    text-align: center;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translateX(-50%) translateY(-50%);
+    -webkit-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+}
+
+.btn-ty {
+    margin-bottom: 2%;
+    background-color: rgb(0, 43, 92) !important;
+    color: white !important;
+}
+
 /* IMAGE HOVER https://bootstrapious.com/p/bootstrap-image-hover*/
 
 .hover {

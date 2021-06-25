@@ -22,6 +22,7 @@
               <textarea class="form-control" type="text" name="corps" placeholder="Écrivez votre requête ici" rows="10" cols="100" id="corps" required></textarea>
             </div>
             <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="_next" value="http://localhost:3000/#/Thankyou">
             <button class="btn btn-contact" id="envoyer-form" type="submit">Envoyer</button>
           </form>
         </div>
