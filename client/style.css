@@ -43,17 +43,30 @@ body {
 
 .titre-contact {
     margin-top: 5%;
+    margin-bottom: 5%;
+    text-align: center;
 }
 
 .btn-contact {
-    margin-top: 3%;
-    margin-left: auto;
+    margin: 0 auto;
 }
 
-.test {
-    padding: 3%;
+.contact-div {
+    text-align: center;
 }
 
+.text-contact {
+    text-align: left;
+}
+
+#div1 {
+    background: linear-gradient(to right, rgba(0, 43, 92,0.4), rgba(0, 0, 0, 0.1));
+}
+
+#div2 {
+    text-align:center;
+    background: linear-gradient(to left, rgba(226, 25, 55,0.4), rgba(0, 0, 0, 0.1));
+}
 
 /* IMAGE HOVER https://bootstrapious.com/p/bootstrap-image-hover*/
 
