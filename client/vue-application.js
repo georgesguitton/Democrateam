@@ -3,8 +3,10 @@ const ListeElections = window.httpVueLoader('./components/ListeElections.vue')
 const Contact = window.httpVueLoader('./components/Contact.vue')
 const CreerElection = window.httpVueLoader('./components/CreerElection.vue')
 const Login = window.httpVueLoader('./components/Login.vue')
+const Register = window.httpVueLoader('./components/Register.vue')
 const PageElection = window.httpVueLoader('./components/PageElection.vue')
 const Profil = window.httpVueLoader('./components/Profil.vue')
+const Thankyou = window.httpVueLoader('./components/Thankyou.vue')
 
 const routes = [
     { path: '/', component: Home },
@@ -14,6 +16,8 @@ const routes = [
     { path: '/login', component: Login },
     { path: '/pageElection', component: PageElection },
     { path: '/profil', component: Profil },
+    { path: '/thankyou', component: Thankyou },
+    { path: '/register', component: Register },
 ]
 
 const router = new VueRouter({
@@ -44,7 +48,7 @@ const app = new Vue({
             const res = await axios.get('/api/getElection/' + id)
             this.election.info = this.elections.find(election => election.idElection === id)
             this.election.candidat = res.data
-            this.$router.push('PageElection')
+            router.push('/PageElection')
         },
         async logIn(user) {
             const userTeam = await axios.post('/api/login/', user)
@@ -70,6 +74,6 @@ const app = new Vue({
                 this.connected = false;
                 router.push('/')
             }
-        }
+        },
     }
 })

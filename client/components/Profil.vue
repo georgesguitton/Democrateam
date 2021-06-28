@@ -1,5 +1,6 @@
 <template>
   <div>
+    <navbar :connected="connected" @log-out="logOut"></navbar>
     <div class="container-fluid">
 
       <div class="p-2 mb-4 bg-light rounded-3">
@@ -68,3 +69,28 @@
     </div>
   </div>
 </template>
+
+<script>
+const Navbar = window.httpVueLoader("./components/Navbar.vue");
+module.exports = {
+  components: {
+    Navbar,
+  },
+  props: {
+    connected: { type: Boolean }
+  },
+  data() {
+    return {
+      
+    };
+  },
+  methods: {
+    logIn() {
+      this.$emit("log-in", this.user);
+    },
+    logOut () {
+      this.$emit('log-out')
+    }
+  },
+};
+</script>
