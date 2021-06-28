@@ -63,22 +63,29 @@ router.post('/logout', (req, res) => {
 router.post('/register', async (req, res) => {
   const email = req.body.username.toLowerCase();
   const password = req.body.password
+  var emailPro = req.body.workmail
+  const lastname = req.body.lastname
+  const firstname = req.body.firstname
 
   await con.query('SELECT * FROM Utilisateur WHERE emailPerso=? OR emailPro =?',[email,email],async function(error, results, fields){
     if (results[0] != null) {
       res.status(401).json({
         message: 'user already exists'
       })
-      return
     }
-  })
-  // si on a pas trouvé l'utilisateur
-  // alors on le crée
+    // si on a pas trouvé l'utilisateur
+    // alors on le crée
 
-  const hash = await bcrypt.hash(password, 10)
+    else {
+      const hash = await bcrypt.hash(password, 10)
 
-  await con.query("INSERT INTO `utilisateur`(`emailPerso`, `emailPro`, `mdp`, `nom`, `prenom`, `numElecteur`, `typeUtilisateur`) VALUES (?,NULL,?,'LAMBDA','Paul',NULL,0)",[email, hash],async function(error, results, fields){
-      res.send('ok')
+      if (emailPro === "")
+        emailPro = null
+
+      await con.query("INSERT INTO `utilisateur`(`emailPerso`, `emailPro`, `mdp`, `nom`, `prenom`, `numElecteur`, `typeUtilisateur`) VALUES (?,?,?,?,?,NULL,0)",[email,emailPro,hash,lastname,firstname],async function(error, results, fields){
+          res.send('ok')
+      })
+    }
   })
 })
 

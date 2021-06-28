@@ -204,6 +204,51 @@ body {
 #login .row {
     width: 100%;
 }
+/* REGISTER  */
+
+#register {
+    height: calc(100vh - 20px);
+    min-height: 500px;
+    display: flex;
+    align-items: center;
+    font-family: "Montserrat", sans-serif;
+}
+
+#register form {
+    padding: 30px;
+    border: 1px solid #f1f1f1;
+    background: #fff;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+    border-radius: 7px;
+}
+
+#register #container h1 {
+    margin: 0 auto;
+    padding-bottom: 10px;
+    border-radius: 2px;
+    text-align: center;
+}
+
+#register input[type="text"],
+#register input[type="password"] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    border-radius: 4px;
+}
+
+#register p {
+    color: red;
+}
+
+#register .row {
+    width: 100%;
+}
+
+
 
 /* CREER_ELECTION */
 
