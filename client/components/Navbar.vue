@@ -48,10 +48,10 @@
               <router-link v-if="connected === false" class="col-lg-2 nav-item nav-link" to="/Login"
                 >Connexion</router-link
               >
-              <router-link v-else class="col-lg-2 nav-item nav-link" to="/Login"
+              <router-link v-else class="col-lg-2 nav-item nav-link" to="/Profil"
                 >Mon profil</router-link
               >
-              <router-link v-if="connected === false" class="col-lg-2 nav-item nav-link" to="/profil"
+              <router-link v-if="connected === false" class="col-lg-2 nav-item nav-link" to="/register"
                 >Créer un compte</router-link
               >
               <router-link v-else class="col-lg-2 nav-item nav-link" to="" @click="logOut()"
