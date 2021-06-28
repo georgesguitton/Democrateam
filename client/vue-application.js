@@ -7,6 +7,7 @@ const Register = window.httpVueLoader('./components/Register.vue')
 const PageElection = window.httpVueLoader('./components/PageElection.vue')
 const Profil = window.httpVueLoader('./components/Profil.vue')
 const Thankyou = window.httpVueLoader('./components/Thankyou.vue')
+const FormulaireElection = window.httpVueLoader('./components/FormulaireElection.vue')
 
 const routes = [
     { path: '/', component: Home },
@@ -18,6 +19,7 @@ const routes = [
     { path: '/profil', component: Profil },
     { path: '/thankyou', component: Thankyou },
     { path: '/register', component: Register },
+    { path: '/formulaireElection', component: FormulaireElection },
 ]
 
 const router = new VueRouter({
