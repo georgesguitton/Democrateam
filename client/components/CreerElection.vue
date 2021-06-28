@@ -58,6 +58,9 @@ module.exports = {
     test() {
       router.push('/formulaireElection')
     },
+    logOut() {
+      this.$emit("log-out");
+    },
   },
 };
 </script>

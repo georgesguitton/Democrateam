@@ -80,5 +80,8 @@ module.exports = {
       }
     },
   },
+  logOut() {
+      this.$emit("log-out");
+    },
 };
 </script>
