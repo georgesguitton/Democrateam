@@ -5,10 +5,18 @@
       <div class="row justify-content-center">
         <div id="container" class="col-md-6 col-sm-8 col-lg-5 col-xl-4" >
 
-          <form class="card form-creer" @submit.prevent="test">
+          <form class="card form-creer" @submit.prevent="passerPageSuivante">
             <h2 class="title_create">Créer votre élection</h2>
-            <div class="card card-candidat contener-election" v-for="n in 4">
-
+            <div class="card card-candidat contener-election form-group">
+              <label>Nom de l'élection</label>
+              <input
+                  type="text"
+                  placeholder="Entrez le nom de l'élection"
+                  name="nom_election"
+                  required
+              />
+            </div>
+            <div class="card card-candidat contener-election" v-for="n in participants">
             <div class="form-group">
               <label>Nom du candidat</label>
               <input
@@ -70,16 +78,16 @@ module.exports = {
   },
   props: {
     connected: { type: Boolean },
+    participants: {type : Number}
   },
   data() {
-    return {};
+    return {
+
+    };
   },
   methods: {
-    test() {
+    passerPageSuivante() {
       router.push('/formulaireElection')
-    },
-    logOut() {
-      this.$emit("log-out");
     },
   },
 };

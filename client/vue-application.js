@@ -35,6 +35,7 @@ const app = new Vue({
             info: [],
             candidat: []
         },
+        participants :0,
         user: {},
         connected: false
     },
@@ -80,6 +81,11 @@ const app = new Vue({
                 this.connected = false;
                 router.push('/')
             }
+        },
+        async changeParticipants(participants) {
+            this.participants = parseInt(participants)
+            router.push('/CreerElection')
+            router.push('/FormulaireElection')
         },
     }
 })
