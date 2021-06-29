@@ -24,7 +24,7 @@
               le.<br />
               &bull; Voilà, votre vote a été soumis.
             </p>
-            <button class="btn-black" type="button">Liste des élections</button>
+           <router-link to='/listeElections' class="btn-black">Liste des élections</router-link>
           </div>
         </div>
 
@@ -39,7 +39,7 @@
               &bull; Validez votre l'élection.<br />
               &bull; Voilà, votre élection a été créée.
             </p>
-            <button class="btn-white" type="button">Créer une élection</button>
+           <router-link to='/CreerElection' class=" btn-white">Créer une élection</router-link>
           </div>
         </div>
       </div>

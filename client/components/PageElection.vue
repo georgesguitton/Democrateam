@@ -1,26 +1,30 @@
 <template>
-<div>
-  <header class="masthead bg-primary text-white text-center">
-    <div class="container d-flex align-items-center flex-column">
+<div class="index">
+  <header class="masthead bg-primary text-white text-center index ">
+    <svg class="container d-flex align-items-center flex-column index">
       <!-- Masthead Heading-->
       <h1 class="masthead-heading text-uppercase mb-0">{{election.info.titre}}</h1>
       <!-- Icon Divider-->
       <div class="divider-custom divider-light">
         <div class="divider-custom-line"></div>
-        <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+        <div class="divider-custom-icon"></div>
         <div class="divider-custom-line"></div>
       </div>
       <!-- Masthead Avatar Image-->
-      <img src="https://th.bing.com/th/id/R4df180105dc4bea229839cf0ce8d85dd?rik=99BXfH9QgMRlzA&pid=ImgRaw" class="col-md-8" />
+
+      <svg class="objet-img  divider-custom indexe align-items-center" :style="{ backgroundImage: 'url('+ election.info.urlImage +')' }"
+      ></svg>
       <!-- Icon Divider-->
       <div class="divider-custom divider-light">
         <div class="divider-custom-line"></div>
-        <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+        <div class="divider-custom-icon"></div>
         <div class="divider-custom-line"></div>
       </div>
+
       <!-- Masthead Subheading-->
       <p class="masthead-subheading font-weight-light mb-0"> {{election.info.dateDebut}} -  {{election.info.dateFin}} </p>
-    </div>
+
+    </svg>
   </header>
   <!-- Portfolio Section-->
   <section class="page-section portfolio" id="portfolio">
@@ -39,22 +43,20 @@
 
           <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
 
-                       <div class="col" v-for="candidat in election.candidat" :key="election.candidat.idChoix">
+                       <div class="col-lg-8 col-12" v-for="candidat in election.candidat" :key="election.candidat.idChoix">
 
-
+<div class="card">
                          <p>{{ candidat.libelle}}</p>
-                                        <div class="card shadow-sm">
-                                          <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
-                                            <title>Une chose</title>
-                                            <rect width="100%" height="100%" fill="#55595c" />
+
+                                          <svg class="bd-placeholder-img card-img-top objet-img" :style="{ backgroundImage: 'url('+ candidat.urlImage +')' }" >
+
+                                           <title>Une chose</title>
+
                                           </svg>
 
                                           <div class="card-body">
-                                            <p class="card-text">{{candidat.description}}</p>
-                                            <div class="d-flex justify-content-between align-items-center">
-                                              <div>
-                                                <a href="#">Plus d'information</a>
-                                              </div>
+                                            <p class="card-text">{{candidat.description}} - {{candidat.lienInfo}}</p>
+                                            <p class="card-text"> Pour plus d'information, consultez le site {{candidat.lienInfo}}</p>
                                             </div>
                                           </div>
                                         </div>
@@ -64,7 +66,7 @@
                                     </div>
                                   </div>
    </div>
-    </div>
+
  </section>
  <!-- About Section-->
   <section class="page-section bg-primary text-white mb-0" id="about">
@@ -114,10 +116,22 @@ module.exports = {
   }
 }
 
-
-
-
-
-
-
 </script>
+
+<style>
+.objet-img{
+  height: 100%;
+  background-size: contain;
+  background-repeat: no-repeat;
+  max-height: 500px;
+  background-position: center center;
+}
+.index{
+  z-index: 1;
+}
+.indexe{
+  z-index: 80;
+}
+
+
+</style>
