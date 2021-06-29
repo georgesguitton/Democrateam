@@ -31,6 +31,7 @@ const app = new Vue({
     el: '#app',
     data: {
         elections: [],
+        inscriptions: [],
         election: {
             info: [],
             candidat: []
@@ -47,6 +48,10 @@ const app = new Vue({
 
     },
     methods: {
+        async getInscriptions(){
+          const res = await axios.get('/api/inscriptions')
+          this.inscriptions = res.data
+        },
         async getElections() {
           const res = await axios.get('/api/elections')
           this.elections = res.data

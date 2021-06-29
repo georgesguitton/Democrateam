@@ -8,6 +8,19 @@ const con = require('../init-db.js')
 /* --- TEST CONNECTION BD */
 router.get('/', (req, res) => res.send('Hello World!'))
 
+router.get('/inscriptions', async(req, res) => {
+    console.log(req.session.userId)
+    if(req.session.userId){
+      const result = await con.query('SELECT * FROM inscriptionDispo', function(error, results, fields) {
+            res.json(results)
+      })
+    }
+    else{
+      res.json(null)
+    }
+
+})
+
 router.get('/elections', async(req, res) => {
     console.log(req.session.userId)
     if(req.session.userId){
