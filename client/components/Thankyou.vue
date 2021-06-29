@@ -7,8 +7,10 @@
 </div>
 </template>
 <script>
+const Navbar = window.httpVueLoader("./components/Navbar.vue");
 module.exports = {
   components: {
+    Navbar,
   },
   props: {
   },
@@ -18,6 +20,9 @@ module.exports = {
   methods: {
     test() {
       router.push('/')
+    },
+    logOut() {
+      this.$emit("log-out");
     },
   },
 }
