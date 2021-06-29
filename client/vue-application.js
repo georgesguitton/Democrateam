@@ -46,6 +46,10 @@ const app = new Vue({
 
     },
     methods: {
+        async getElections() {
+          const res = await axios.get('/api/elections')
+          this.elections = res.data
+        },
         async getElection(id) {
             const res = await axios.get('/api/getElection/' + id)
             this.election.info = this.elections.find(election => election.idElection === id)

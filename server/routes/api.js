@@ -9,9 +9,16 @@ const con = require('../init-db.js')
 router.get('/', (req, res) => res.send('Hello World!'))
 
 router.get('/elections', async(req, res) => {
-    const result = await con.query('SELECT * FROM election', function(error, results, fields) {
-        res.json(results)
-    })
+    console.log(req.session.userId)
+    if(req.session.userId){
+      const result = await con.query('SELECT * FROM electiondispoutilisateur WHERE Participant =?', [req.session.userId], function(error, results, fields) {
+            res.json(results)
+      })
+    }
+    else{
+      res.json(null)
+    }
+
 })
 
 router.get('/getElection/:id', async(req, res) => {
