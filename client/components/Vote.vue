@@ -11,7 +11,7 @@
             <p>{{c.libelle}}</p>
           </div>
           <button class="btn btn-primary btn-vote_candidat text-white" @click="voter()"> Voter </button>
-
+<p>ecris</p>
         </div>
       </div>
       </div>
