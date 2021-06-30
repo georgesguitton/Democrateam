@@ -86,6 +86,8 @@ const app = new Vue({
                     }
                 })) {
                 this.connected = false;
+                this.elections = [];
+                this.inscriptions = [];
                 router.push('/')
             }
         },
