@@ -12,7 +12,7 @@
           </router-link>
 
           <div class="col-lg-10 row">
-            <router-link class="col-lg-2 nav-item nav-link active" to="/">Accueil<span class="sr-only">(current)</span></router-link>
+            <router-link class="col-lg-2 nav-item nav-link" to="/">Accueil<span class="sr-only">(current)</span></router-link>
             <router-link class="col-lg-2 nav-item nav-link" to="/ListeElections">Liste des élections</router-link>
             <router-link class="col-lg-2 nav-item nav-link" to="/CreerElection">Créer une élection</router-link>
             <router-link class="col-lg-2 nav-item nav-link" to="/Contact">Contact</router-link>

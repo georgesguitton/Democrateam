@@ -1,7 +1,7 @@
 <template>
 <div class="index">
   <navbar :connected="connected" @log-out="logOut"></navbar>
-  <header class="masthead bg-primary text-white text-center index ">
+  <header class="masthead bg-perso text-white text-center index ">
     <svg class="container d-flex align-items-center flex-column index">
       <!-- Masthead Heading-->
       <h1 class="masthead-heading text-uppercase mb-0">{{election.info.titre}}</h1>
@@ -30,7 +30,7 @@
   <section class="page-section portfolio" id="portfolio">
     <div class="container">
       <!-- Portfolio Section Heading-->
-      <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Candidats</h2>
+      <h2 class="page-section-heading text-center text-uppercase text-secondary-perso mb-0">Candidats</h2>
       <!-- Icon Divider-->
       <div class="divider-custom">
         <div class="divider-custom-line"></div>
@@ -69,7 +69,7 @@
 
   </section>
   <!-- About Section-->
-  <section class="page-section bg-primary text-white mb-0" id="about">
+  <section class="page-section bg-perso text-white mb-0" id="about">
     <div class="container">
       <!-- About Section Heading-->
       <h2 class="page-section-heading text-center text-uppercase text-white">Descriptif</h2>
@@ -141,6 +141,14 @@ module.exports = {
 </script>
 
 <style>
+.bg-perso {
+    background-color: #002a5e !important;
+}
+
+.text-secondary-perso {
+    color: #002a5e !important;
+}
+
 .objet-img {
   height: 100%;
   background-size: contain;
