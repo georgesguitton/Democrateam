@@ -12,6 +12,7 @@
           </div>
           <button class="btn btn-primary btn-vote_candidat text-white" @click="voter()"> Voter </button>
 <p>ecrise</p>
+<p>ecrisa</p>
         </div>
       </div>
       </div>
