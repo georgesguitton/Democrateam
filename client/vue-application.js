@@ -36,7 +36,7 @@ const app = new Vue({
             info: [],
             candidat: []
         },
-        participants :0,
+        participants: 0,
         user: {},
         connected: false
     },
@@ -48,13 +48,13 @@ const app = new Vue({
 
     },
     methods: {
-        async getInscriptions(){
-          const res = await axios.get('/api/inscriptions')
-          this.inscriptions = res.data
+        async getInscriptions() {
+            const res = await axios.get('/api/inscriptions')
+            this.inscriptions = res.data
         },
         async getElections() {
-          const res = await axios.get('/api/elections')
-          this.elections = res.data
+            const res = await axios.get('/api/elections')
+            this.elections = res.data
         },
         async getElection(id) {
             const res = await axios.get('/api/getElection/' + id)
@@ -63,15 +63,15 @@ const app = new Vue({
             router.push('/PageElection')
         },
         async logIn(user) {
-            const userTeam = await axios.post('/api/login/', user)
+            const userInfo = await axios.post('/api/login/', user)
                 .catch(function(error) {
                     if (error.response.status === 400 || error.response.status === 401) {
                         document.getElementById('errorLogInMessage').innerHTML = "La combinaison est incorrecte.";
                         return error.response;
                     }
                 })
-            if (userTeam.status === 200) {
-                this.team = userTeam.data;
+            if (userInfo.status === 200) {
+                this.user = userInfo.data;
                 this.connected = true;
                 router.push('/')
             }
@@ -92,5 +92,32 @@ const app = new Vue({
             router.push('/CreerElection')
             router.push('/FormulaireElection')
         },
+
+        // PROFILE METHODS
+        async editPassword(passwordInfo) {
+            const editResult = await axios.put('/api/editPassword/', passwordInfo)
+                .catch(function(error) {
+                    if (error.response.status === 401) {
+                        document.getElementById('errorEditPasswordMessage').innerHTML = "Nouveaux mots de passe non identique.";
+                        document.getElementById('successEditPasswordMessage').innerHTML = "";
+                        console.log(error)
+                        return error.response;
+                    } else if (error.response.status === 400) {
+                        document.getElementById('errorEditPasswordMessage').innerHTML = "Ancien mot de passe incorrect.";
+                        document.getElementById('successEditPasswordMessage').innerHTML = "";
+                        console.log(error)
+                        return error.response;
+                    } else if (error.response.status === 404) {
+                        document.getElementById('errorEditPasswordMessage').innerHTML = "Une erreur est survenue.";
+                        document.getElementById('successEditPasswordMessage').innerHTML = "";
+                        console.log(error)
+                        return error.response;
+                    }
+                })
+            if (editResult.status === 200) {
+                document.getElementById('errorEditPasswordMessage').innerHTML = "";
+                document.getElementById('successEditPasswordMessage').innerHTML = "Mot de passe modifié avec succès.";
+            }
+        }
     }
 })

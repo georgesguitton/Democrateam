@@ -5,31 +5,37 @@ const bcrypt = require('bcrypt')
 
 const con = require('../init-db.js')
 
+class User {
+    constructor() {
+        this.createdAt = new Date()
+        this.updatedAt = new Date()
+        this.user;
+    }
+}
+
 /* --- TEST CONNECTION BD */
 router.get('/', (req, res) => res.send('Hello World!'))
 
 router.get('/inscriptions', async(req, res) => {
     console.log(req.session.userId)
-    if(req.session.userId){
-      const result = await con.query('SELECT * FROM inscriptionDispo', function(error, results, fields) {
+    if (req.session.userId) {
+        const result = await con.query('SELECT * FROM inscriptionDispo', function(error, results, fields) {
             res.json(results)
-      })
-    }
-    else{
-      res.json(null)
+        })
+    } else {
+        res.json(null)
     }
 
 })
 
 router.get('/elections', async(req, res) => {
     console.log(req.session.userId)
-    if(req.session.userId){
-      const result = await con.query('SELECT * FROM electiondispoutilisateur WHERE Participant =?', [req.session.userId], function(error, results, fields) {
+    if (req.session.userId) {
+        const result = await con.query('SELECT * FROM electiondispoutilisateur WHERE Participant =?', [req.session.userId], function(error, results, fields) {
             res.json(results)
-      })
-    }
-    else{
-      res.json(null)
+        })
+    } else {
+        res.json(null)
     }
 
 })
@@ -54,12 +60,22 @@ router.post('/login', async(req, res) => {
             res.status(400).json({ message: 'user doesn\'t exists' });
             return
         }
-
+        console.log(results[0])
         if (await bcrypt.compare(password, results[0].mdp)) {
             req.session.userId = results[0].idUtilisateur
-                // on envoie l'id du user au client.
+            console.log(req.session.userId)
+            req.session.user = new User()
+            const user = {
+                email: results[0].emailPerso,
+                emailPro: results[0].emailPro,
+                lastname: results[0].nom,
+                firstname: results[0].prenom,
+                electorId: results[0].numElecteur
+            }
+            req.session.user.user = user;
+            // on envoie le user au client.
 
-            return res.json(req.session.userId)
+            return res.json(req.session.user.user)
         } else {
             return res.status(401).json({ message: 'wrong password' })
         }
@@ -80,33 +96,60 @@ router.post('/logout', (req, res) => {
     }
 })
 
-router.post('/register', async (req, res) => {
-  const email = req.body.username.toLowerCase();
-  const password = req.body.password
-  var emailPro = req.body.workmail
-  const lastname = req.body.lastname
-  const firstname = req.body.firstname
+router.post('/register', async(req, res) => {
+    const email = req.body.username.toLowerCase();
+    const password = req.body.password
+    var emailPro = req.body.workmail
+    const lastname = req.body.lastname
+    const firstname = req.body.firstname
 
-  await con.query('SELECT * FROM Utilisateur WHERE emailPerso=? OR emailPro =?',[email,email],async function(error, results, fields){
-    if (results[0] != null) {
-      res.status(401).json({
-        message: 'user already exists'
-      })
+    await con.query('SELECT * FROM Utilisateur WHERE emailPerso=? OR emailPro =?', [email, email], async function(error, results, fields) {
+        if (results[0] != null) {
+            res.status(401).json({
+                message: 'user already exists'
+            })
+        }
+        // si on a pas trouvé l'utilisateur
+        // alors on le crée
+        else {
+            const hash = await bcrypt.hash(password, 10)
+
+            if (emailPro === "")
+                emailPro = null
+
+            await con.query("INSERT INTO `utilisateur`(`emailPerso`, `emailPro`, `mdp`, `nom`, `prenom`, `numElecteur`, `typeUtilisateur`) VALUES (?,?,?,?,?,NULL,0)", [email, emailPro, hash, lastname, firstname], async function(error, results, fields) {
+                res.send('ok')
+            })
+        }
+    })
+})
+
+/**
+ * Cette route permet de modifier un mot de passe.
+ */
+router.put('/editPassword', async(req, res) => {
+    const oldPassword = req.body.oldPassword
+    const newPassword = req.body.newPassword
+    const confirmPassword = req.body.confirmPassword
+    console.log(req.session.userId)
+
+    if (newPassword != confirmPassword) {
+        return res.status(401).json({ message: 'confirm password not accurate' })
     }
-    // si on a pas trouvé l'utilisateur
-    // alors on le crée
 
-    else {
-      const hash = await bcrypt.hash(password, 10)
+    await con.query('SELECT * FROM Utilisateur WHERE idUtilisateur=?', [req.session.userId], async function(error, results, fields) {
+        if (await bcrypt.compare(oldPassword, results[0].mdp)) {
+            const newHashedPassword = await bcrypt.hash(newPassword, 10)
+            await con.query('UPDATE utilisateur SET mdp=? WHERE idUtilisateur=?', [newHashedPassword, req.session.userId], async function(error, results, fields) {
+                    res.send('ok')
+                })
+                // on envoie le user au client.
 
-      if (emailPro === "")
-        emailPro = null
-
-      await con.query("INSERT INTO `utilisateur`(`emailPerso`, `emailPro`, `mdp`, `nom`, `prenom`, `numElecteur`, `typeUtilisateur`) VALUES (?,?,?,?,?,NULL,0)",[email,emailPro,hash,lastname,firstname],async function(error, results, fields){
-          res.send('ok')
-      })
-    }
-  })
+            return res.json({ message: 'password modified successfully' })
+        } else {
+            return res.status(400).json({ message: 'wrong old password' })
+        }
+    })
 })
 
 module.exports = router
