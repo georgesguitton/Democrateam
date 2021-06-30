@@ -13,8 +13,7 @@
       </div>
       <!-- Masthead Avatar Image-->
 
-      <svg class="objet-img  divider-custom indexe align-items-center" :style="{ backgroundImage: 'url('+ election.info.urlImage +')' }"
-      ></svg>
+      <svg class="objet-img  divider-custom indexe align-items-center" :style="{ backgroundImage: 'url('+ election.info.urlImage +')' }"></svg>
       <!-- Icon Divider-->
       <div class="divider-custom divider-light">
         <div class="divider-custom-line"></div>
@@ -23,7 +22,7 @@
       </div>
 
       <!-- Masthead Subheading-->
-      <p class="masthead-subheading font-weight-light mb-0"> Du {{election.info.dateDebut.substr(-200,10)}} au  {{election.info.dateFin}} </p>
+      <p class="masthead-subheading font-weight-light mb-0"> Du {{election.info.dateDebut.substr(-200,10)}} au {{election.info.dateFin}} </p>
 
     </svg>
   </header>
@@ -44,32 +43,32 @@
 
           <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
 
-                       <div class="col-lg-6 col-12" v-for="candidat in election.candidat" :key="election.candidat.idChoix">
+            <div class="col-lg-6 col-12" v-for="candidat in election.candidat" :key="election.candidat.idChoix">
 
-<div class="card">
-                         <p>{{ candidat.libelle}}</p>
+              <div class="card">
+                <p>{{ candidat.libelle}}</p>
 
-                                          <svg class="bd-placeholder-img card-img-top objet-img" :style="{ backgroundImage: 'url('+ candidat.urlImage +')' }" >
+                <svg class="bd-placeholder-img card-img-top objet-img" :style="{ backgroundImage: 'url('+ candidat.urlImage +')' }">
 
-                                           <title>Une chose</title>
+                  <title>Une chose</title>
 
-                                          </svg>
+                </svg>
 
-                                          <div class="card-body">
-                                            <p class="card-text">{{candidat.description}} - {{candidat.lienInfo}}</p>
-                                            <p class="card-text"> Pour plus d'information, consultez le site {{candidat.lienInfo}}</p>
-                                            </div>
-                                          </div>
-                                        </div>
+                <div class="card-body">
+                  <p class="card-text">{{candidat.description}}</p>
+                  <p class="card-text"> Pour plus d'information, consultez <a :href="candidat.lienInfo">le site</a></p>
+                </div>
+              </div>
+            </div>
 
-                                      </div>
+          </div>
 
-                                    </div>
-                                  </div>
-   </div>
+        </div>
+      </div>
+    </div>
 
- </section>
- <!-- About Section-->
+  </section>
+  <!-- About Section-->
   <section class="page-section bg-primary text-white mb-0" id="about">
     <div class="container">
       <!-- About Section Heading-->
@@ -82,23 +81,16 @@
       </div>
       <!-- About Section Content-->
       <div class="text-center mt-4">
-          <p class="lead text-center text-white">{{election.info.description}}</p>
-        </div>
+        <p class="lead text-center text-white">{{election.info.description}}</p>
+      </div>
 
-      </div>
-      <!-- About Section Button-->
-      <div class="text-center mt-4">
-        <!--<a class="btn btn-xl btn-outline-light" href="https://startbootstrap.com/theme/freelancer/">
-          <i class="fas fa-download me-2"></i>
-          Votez
-        </a>-->
-        <button v-on:click="passeVote()"
-        class="btn btn-primary text-white"
-        type="submit"
-        >
+    </div>
+    <!-- About Section Button-->
+    <div class="text-center mt-4">
+      <button v-on:click="passeVote()" class="btn btn-primary text-white" type="submit">
         Voter
-        </button>
-      </div>
+      </button>
+    </div>
 
   </section>
 </div>
@@ -111,15 +103,24 @@ module.exports = {
     Navbar,
   },
   props: {
-    connected: { type: Boolean },
-    elections: { type: Array, default: [] },
-    election: { type: Object },
+    connected: {
+      type: Boolean
+    },
+    elections: {
+      type: Array,
+      default: []
+    },
+    election: {
+      type: Object
+    },
   },
-  data () {
-    return {
+  data() {
+    return {}
+  },
+  async mounted() {
+    if(this.election.info.length === 0){
+      this.$router.push('/listeElections')
     }
-  },
-  async mounted () {
   },
   methods: {
     logIn() {
@@ -129,19 +130,18 @@ module.exports = {
       this.$emit("log-out");
     },
 
-    getElection (id) {
-      this.$emit('getElection',id)
+    getElection(id) {
+      this.$emit('getElection', id)
     },
-    passeVote(){
+    passeVote() {
       router.push('/vote')
     }
   }
 }
-
 </script>
 
 <style>
-.objet-img{
+.objet-img {
   height: 100%;
   background-size: contain;
   background-repeat: no-repeat;
@@ -149,12 +149,12 @@ module.exports = {
   height: auto;
   background-position: center center;
 }
-.index{
+
+.index {
   z-index: 1;
 }
-.indexe{
+
+.indexe {
   z-index: 80;
 }
-
-
 </style>

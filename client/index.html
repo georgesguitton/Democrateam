@@ -26,7 +26,7 @@
     <div id="app">
         <main>
             <router-view :elections="elections" :election="election" :connected="connected" :user="user" :participants="participants" :inscriptions="inscriptions" @get-inscriptions="getInscriptions" @get-elections="getElections" @get-election="getElection" @log-in="logIn"
-                @log-out="logOut" @edit-password="editPassword" @change-participants="changeParticipants"></router-view>
+                @log-out="logOut" @edit-password="editPassword" @change-participants="changeParticipants" @voter="voter"></router-view>
         </main>
     </div>
     <script src="/vue-application.js"></script>

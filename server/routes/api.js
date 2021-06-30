@@ -124,6 +124,19 @@ router.post('/register', async(req, res) => {
     })
 })
 
+router.post('/voter', async (req, res) => {
+    if(req.session.userId) {
+        const voteCandidat= req.body.id
+        await con.query("UPDATE choix SET nbVotant = nbvotant+1 WHERE idChoix= ?",[voteCandidat],async function(error, results, fields){
+        })
+        const idElection =req.body.idElection
+        await con.query("UPDATE participant SET aVote = TRUE WHERE idUtilisateur= ? AND idElection=?",[req.session.userId, idElection],async function(error, results, fields){
+            res.send('ok')
+        })
+    }
+
+})
+
 /**
  * Cette route permet de modifier un mot de passe.
  */

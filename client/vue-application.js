@@ -96,6 +96,11 @@ const app = new Vue({
             router.push('/CreerElection')
             router.push('/FormulaireElection')
         },
+        async voter(selected){
+            await axios.post('/api/voter/', selected)
+            this.election = []
+            router.push('/')
+        },
 
         // PROFILE METHODS
         async editPassword(passwordInfo) {
@@ -122,6 +127,6 @@ const app = new Vue({
                 document.getElementById('errorEditPasswordMessage').innerHTML = "";
                 document.getElementById('successEditPasswordMessage').innerHTML = "Mot de passe modifié avec succès.";
             }
-        }
+        },
     }
 })
