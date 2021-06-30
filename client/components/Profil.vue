@@ -10,7 +10,7 @@
               src="./images/pp.jpg"
             />
             <h2 class="col-10 col-md-8 fs-4 d-flex align-items-center">
-              Bienvenue, #name# !
+              Bienvenue, {{ user.firstname }} !
             </h2>
           </div>
         </div>
