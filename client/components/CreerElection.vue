@@ -5,7 +5,7 @@
       <div class="row justify-content-center">
         <div id="container" class="col-md-6 col-sm-8 col-lg-5 col-xl-4" >
 
-          <form class="card form-creer" @submit.prevent="test">
+          <form class="card form-creer" @submit.prevent="changeParticipants">
             <h2 class="title_create">Créer votre élection</h2>
 
             <div class="form-group">

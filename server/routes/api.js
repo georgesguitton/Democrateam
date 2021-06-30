@@ -164,5 +164,33 @@ router.put('/editPassword', async(req, res) => {
         }
     })
 })
+/* creation d'élection
+router.post('/FormulaireElection', async (req, res) => {
+
+    const idUtilisateur = req.session.userId
+
+    const nomElection = req.body.nom_election
+    const descriptionElection = req.body.description_election
+    const dateDebut = req.body.date_debut
+    const dateFin = req.body.date_fin
+    const imageElection = req.body.image_election
+    const typeElection = req.body.type_election
+
+    const nomCandidat = req.body.nom_candidat
+    const descCandidat = req.body.description_candidat
+    const urlImage = req.body.image_candidat
+    const urlSite = req.body.site_candidat
+
+    var numElection
+
+    if(req.session.userId) {
+        await con.query("INSERT INTO `election`(`titre`, `description`, `dateDebut`, `dateFin`, `urlImage`,`idUtilisateur`,`idTypeElection`) VALUES (?,?,?,?,?,?,?)",[nomElection,descriptionElection,dateDebut,dateFin,imageElection,idUtilisateur,typeElection],async function(error, results, fields){
+            numElection = results.insertId
+        })
+        await con.query("INSERT INTO `choix`(`libelle`, `urlImage`, `description`, `nbVotant`, `lienInfo`,`ìdElection`) VALUES (?,?,?,0,?,?)",[nomElection,urlImage,descriptionElection,urlSite,numElection],async function(error, results, fields){
+            res.send('ok')
+        })
+    }
+})*/
 
 module.exports = router

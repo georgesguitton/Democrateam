@@ -38,7 +38,11 @@ const app = new Vue({
             info: [],
             candidat: []
         },
-        participants: 0,
+        participants :0,
+        /*creationElection: {
+            data: {},
+            candidats: []
+        },*/
         user: {},
         connected: false
     },
@@ -128,5 +132,16 @@ const app = new Vue({
                 document.getElementById('successEditPasswordMessage').innerHTML = "Mot de passe modifié avec succès.";
             }
         },
+      /*  async creationElection(creationElection) {
+            if (await axios.post('/api/FormulaireElection/')
+                .catch(function(error) {
+                    if (error.response.status === 400 || error.response.status === 401) {
+                        console.log(error)
+                    }
+                }))
+            {
+                router.push('/')
+            }
+        }, */
     }
 })
