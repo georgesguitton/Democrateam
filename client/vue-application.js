@@ -8,7 +8,7 @@ const PageElection = window.httpVueLoader('./components/PageElection.vue')
 const Profil = window.httpVueLoader('./components/Profil.vue')
 const Thankyou = window.httpVueLoader('./components/Thankyou.vue')
 const FormulaireElection = window.httpVueLoader('./components/FormulaireElection.vue')
-
+const Vote = window.httpVueLoader('./components/Vote.vue')
 const routes = [
     { path: '/', component: Home },
     { path: '/listeElections', component: ListeElections },
@@ -20,6 +20,8 @@ const routes = [
     { path: '/thankyou', component: Thankyou },
     { path: '/register', component: Register },
     { path: '/formulaireElection', component: FormulaireElection },
+    { path: '/vote', component: Vote },
+
 ]
 
 const router = new VueRouter({

@@ -1,5 +1,6 @@
 <template>
 <div class="index">
+  <navbar :connected="connected" @log-out="logOut"></navbar>
   <header class="masthead bg-primary text-white text-center index ">
     <svg class="container d-flex align-items-center flex-column index">
       <!-- Masthead Heading-->
@@ -22,7 +23,7 @@
       </div>
 
       <!-- Masthead Subheading-->
-      <p class="masthead-subheading font-weight-light mb-0"> {{election.info.dateDebut}} -  {{election.info.dateFin}} </p>
+      <p class="masthead-subheading font-weight-light mb-0"> Du {{election.info.dateDebut.substr(-200,10)}} au  {{election.info.dateFin}} </p>
 
     </svg>
   </header>
@@ -43,7 +44,7 @@
 
           <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
 
-                       <div class="col-lg-8 col-12" v-for="candidat in election.candidat" :key="election.candidat.idChoix">
+                       <div class="col-lg-6 col-12" v-for="candidat in election.candidat" :key="election.candidat.idChoix">
 
 <div class="card">
                          <p>{{ candidat.libelle}}</p>
@@ -87,18 +88,30 @@
       </div>
       <!-- About Section Button-->
       <div class="text-center mt-4">
-        <a class="btn btn-xl btn-outline-light" href="https://startbootstrap.com/theme/freelancer/">
+        <!--<a class="btn btn-xl btn-outline-light" href="https://startbootstrap.com/theme/freelancer/">
           <i class="fas fa-download me-2"></i>
           Votez
-        </a>
+        </a>-->
+        <button v-on:click="passeVote()"
+        class="btn btn-primary text-white"
+        type="submit"
+        >
+        Voter
+        </button>
       </div>
 
   </section>
 </div>
 </template>
 <script>
+const Navbar = window.httpVueLoader("./components/Navbar.vue");
+
 module.exports = {
+  components: {
+    Navbar,
+  },
   props: {
+    connected: { type: Boolean },
     elections: { type: Array, default: [] },
     election: { type: Object },
   },
@@ -109,9 +122,18 @@ module.exports = {
   async mounted () {
   },
   methods: {
+    logIn() {
+      this.$emit("log-in", this.user);
+    },
+    logOut() {
+      this.$emit("log-out");
+    },
 
     getElection (id) {
       this.$emit('getElection',id)
+    },
+    passeVote(){
+      router.push('/vote')
     }
   }
 }
@@ -123,7 +145,8 @@ module.exports = {
   height: 100%;
   background-size: contain;
   background-repeat: no-repeat;
-  max-height: 500px;
+  max-width: 100%;
+  height: auto;
   background-position: center center;
 }
 .index{
