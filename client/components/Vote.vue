@@ -37,6 +37,9 @@ module.exports = {
     }
   },
   async mounted () {
+    if(this.election.info.length === 0){
+      this.$router.push('/listeElections')
+    }
   },
   methods: {
     getElection (id) {
