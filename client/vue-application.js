@@ -33,10 +33,12 @@ const app = new Vue({
     el: '#app',
     data: {
         elections: [],
+        inscriptions: [],
         election: {
             info: [],
             candidat: []
         },
+        participants :0,
         user: {},
         connected: false
     },
@@ -48,6 +50,10 @@ const app = new Vue({
 
     },
     methods: {
+        async getInscriptions(){
+          const res = await axios.get('/api/inscriptions')
+          this.inscriptions = res.data
+        },
         async getElections() {
           const res = await axios.get('/api/elections')
           this.elections = res.data
@@ -82,6 +88,11 @@ const app = new Vue({
                 this.connected = false;
                 router.push('/')
             }
+        },
+        async changeParticipants(participants) {
+            this.participants = parseInt(participants)
+            router.push('/CreerElection')
+            router.push('/FormulaireElection')
         },
     }
 })

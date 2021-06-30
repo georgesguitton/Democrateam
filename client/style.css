@@ -208,7 +208,7 @@ body {
 
 #register {
     height: calc(100vh - 20px);
-    min-height: 500px;
+    min-height: 800px;
     display: flex;
     align-items: center;
     font-family: "Montserrat", sans-serif;

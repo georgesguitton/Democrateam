@@ -9,18 +9,9 @@
             <h2 class="title_create">Créer votre élection</h2>
 
             <div class="form-group">
-              <label>Nom de l'élection</label>
-              <input
-                  type="text"
-                  placeholder="Entrez le nom de l'élection"
-                  name="nom_election"
-                  required
-              />
-            </div>
-
-            <div class="form-group">
               <label>Nombre de candidats</label>
               <input
+                  v-model="participants"
                   type="number"
                   min="1"
                   max="20"
@@ -29,7 +20,7 @@
                   required
               />
             </div>
-            <button v-on:click="test()"
+            <button v-on:click="changeParticipants()"
                 class="btn btn-primary btn-login"
                 type="submit"
             >
@@ -52,15 +43,15 @@ module.exports = {
     connected: { type: Boolean },
   },
   data() {
-    return {};
+    return {
+      participants: Number,
+    };
   },
   methods: {
-    test() {
+    changeParticipants(){
+      this.$emit("change-participants",this.participants)
       router.push('/formulaireElection')
-    },
-    logOut() {
-      this.$emit("log-out");
-    },
+    }
   },
 };
 </script>
