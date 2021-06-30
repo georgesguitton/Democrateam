@@ -22,7 +22,7 @@ Democration is a Web Application that allows its users to create or participate 
 
 The following softwares have been used to design and develop the web application :
 
-*   [Visual Studio Code](https://code.visualstudio.com/)
+*   [Visual Studio Code](https://code.visualstudio.com/) - [IntelliJ](https://www.jetbrains.com/fr-fr/idea/download/#section=windows) - [Atom](https://atom.io/)
     
 *   [PostgreSQL](https://www.postgresql.org/)
     
@@ -55,9 +55,9 @@ Here is a list of web browsers that you can use :
 
 *   [Google Chrome](https://www.google.com/intl/fr_fr/chrome/) : version 91 and above
     
-*   [Mozilla Firefox](https://www.mozilla.org/fr/firefox/new/) :
+*   [Mozilla Firefox](https://www.mozilla.org/fr/firefox/new/) : version 89 and above
     
-*   [Microsoft Edge](https://www.microsoft.com/fr-fr/edge) :
+*   [Microsoft Edge](https://www.microsoft.com/fr-fr/edge) : version 91 and above
     
 
 Other web browsers have not been tested yet and may cause issues when operating the web application.
@@ -79,7 +79,8 @@ Your vote has been sent.
     
 
 In order to create an election, select the "Creer une election" tab.  
-Fill the form with the required informations about your election, add its candidates and validate it.  
+Enter the number of candidates of your election.  
+Fill the forms with information about each candidate and validate the election once you are done.  
 Your election has been created.
 
 4\. Contributors
