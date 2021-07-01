@@ -176,6 +176,29 @@ router.put('/editPassword', async(req, res) => {
         }
     })
 })
+
+router.post('/addCandidat', async (req, res) => {
+    const idElection = req.body.idElection
+    const nomCandidat = req.body.nomCandidat
+    const descCandidat = req.body.descriptionCandidat
+    const urlImage = req.body.imageCandidat
+    const urlSite = req.body.siteCandidat
+
+    //Vérifie que l'élection existe bien avant d'ajouter un candidat
+    await con.query('SELECT * FROM Election WHERE idElection=?', [idElection], async function(error, results, fields) {
+        if (results[0] != null) {
+          await con.query("INSERT INTO `choix`(`libelle`, `urlImage`, `description`, `nbVotant`, `lienInfo`,`ìdElection`) VALUES (?,?,?,0,?,?)",[nomElection,urlImage,descriptionElection,urlSite,idElection],async function(error, results, fields){
+              res.send('Candidat has been inserted')
+          })
+        }
+        else{
+          res.status(401).json({
+              message: 'election no longer exist'
+          })
+        }
+    })
+
+})
 /* creation d'élection
 router.post('/FormulaireElection', async (req, res) => {
 
