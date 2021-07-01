@@ -34,6 +34,7 @@ const app = new Vue({
     data: {
         elections: [],
         inscriptions: [],
+        candidats:[],
         election: {
             info: [],
             candidat: []
@@ -131,6 +132,17 @@ const app = new Vue({
                 document.getElementById('errorEditPasswordMessage').innerHTML = "";
                 document.getElementById('successEditPasswordMessage').innerHTML = "Mot de passe modifié avec succès.";
             }
+        },
+        async creationElection(information){
+          const id = await axios.post('/api/creerElection', information)
+          console.log(id.data)
+          const res = await axios.get('/api/getElection/' + id.data)
+          this.candidats=res.data
+          this.$router.push('/formulaireElection')
+        },
+
+        async updateCandidats(candidats){
+          const res = await axios.put('/api/updateCandidats',candidats)
         },
       /*  async creationElection(creationElection) {
             if (await axios.post('/api/FormulaireElection/')

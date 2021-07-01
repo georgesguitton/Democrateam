@@ -79,9 +79,9 @@ module.exports = {
           this.$router.push('/login')
       }
     },
-  },
-  logOut() {
+    logOut() {
       this.$emit("log-out");
     },
+  },
 };
 </script>

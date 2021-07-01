@@ -176,7 +176,7 @@ router.put('/editPassword', async(req, res) => {
         }
     })
 })
-
+/*
 router.post('/addCandidat', async (req, res) => {
     const idElection = req.body.idElection
     const nomCandidat = req.body.nomCandidat
@@ -199,7 +199,7 @@ router.post('/addCandidat', async (req, res) => {
     })
 
 })
-/* creation d'élection
+
 router.post('/FormulaireElection', async (req, res) => {
 
     const idUtilisateur = req.session.userId
@@ -211,21 +211,66 @@ router.post('/FormulaireElection', async (req, res) => {
     const imageElection = req.body.image_election
     const typeElection = req.body.type_election
 
-    const nomCandidat = req.body.nom_candidat
-    const descCandidat = req.body.description_candidat
-    const urlImage = req.body.image_candidat
-    const urlSite = req.body.site_candidat
-
     var numElection
 
     if(req.session.userId) {
         await con.query("INSERT INTO `election`(`titre`, `description`, `dateDebut`, `dateFin`, `urlImage`,`idUtilisateur`,`idTypeElection`) VALUES (?,?,?,?,?,?,?)",[nomElection,descriptionElection,dateDebut,dateFin,imageElection,idUtilisateur,typeElection],async function(error, results, fields){
             numElection = results.insertId
         })
-        await con.query("INSERT INTO `choix`(`libelle`, `urlImage`, `description`, `nbVotant`, `lienInfo`,`ìdElection`) VALUES (?,?,?,0,?,?)",[nomElection,urlImage,descriptionElection,urlSite,numElection],async function(error, results, fields){
+        await con.query("INSERT INTO `choix`(`libelle`, `urlImage`, `description`, `nbVotant`, `lienInfo`,`ìdElection`) VALUES ('','','',0,'','')",[nomElection,urlImage,descriptionElection,urlSite,numElection],async function(error, results, fields){
             res.send('ok')
         })
     }
-})*/
+})
+*/
+
+router.post('/creerElection', async (req, res) => {
+    //console.log("Creation election")
+
+    const idUtilisateur = req.session.userId
+
+    const nomElection = req.body.data.titreElection
+    const descriptionElection = req.body.data.descriptionElection
+    const dateDebut = req.body.data.dateDebut
+    const dateFin = req.body.data.dateFin
+    const imageElection = req.body.data.imageElection
+    const typeElection = req.body.data.typeElection
+    const numCandidat = req.body.data.participants
+
+    console.log(nomElection+" "+descriptionElection+" "+dateDebut+" "+dateFin+" "+imageElection+" "+typeElection+" "+numCandidat)
+    var numElection
+
+    if(req.session.userId) {
+        await con.query("INSERT INTO `election`(`titre`, `description`, `dateDebut`, `dateFin`, `urlImage`,`idUtilisateur`,`idTypeElection`) VALUES (?,?,?,?,?,?,?)",[nomElection,descriptionElection,dateDebut,dateFin,imageElection,idUtilisateur,typeElection],async function(error, results, fields){
+            //console.log(results)
+            numElection = results.insertId
+            //console.log(numElection)
+            for (var i = 0; i < numCandidat; i++) {
+                await con.query("INSERT INTO `choix`(`libelle`, `urlImage`, `description`, `nbVotant`, `lienInfo`,`idElection`) VALUES ('','','',0,'',?)",[numElection],async function(error, results, fields){
+                })
+            }
+            res.json(numElection)
+        })
+    }
+})
+
+router.put('/updateCandidats', async (req, res) => {
+    if(req.session.userId) {
+        console.log(req.body)
+        candidats = req.body
+        console.log("UPDATE candidats "+candidats.length)
+        for(var i=0;i<candidats.length;i++){
+          const idChoix = candidats[i].idChoix
+          const libelle = candidats[i].libelle
+          const description = candidats[i].description
+          const lienInfo = candidats[i].lienInfo
+          const urlImage = candidats[i].urlImage
+          await con.query("UPDATE `choix` SET `libelle`=?,`urlImage`=?,`description`=?,`lienInfo`=? WHERE idChoix=?",[libelle,urlImage,description,lienInfo,idChoix],async function(error, results, fields){
+          })
+        }
+
+
+    }
+})
 
 module.exports = router
