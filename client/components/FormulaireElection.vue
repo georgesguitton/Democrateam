@@ -44,6 +44,7 @@ module.exports = {
     },
     updateCandidat() {
       this.$emit("update-candidats",this.candidats)
+      this.$router.push('/')
     },
   },
 };
