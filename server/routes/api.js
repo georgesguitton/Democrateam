@@ -40,7 +40,7 @@ router.get('/elections', async(req, res) => {
 
 })
 
-router.get('/getElection/:id', async(req, res) => {
+router.get('/getCandidat/:id', async(req, res) => {
         const id = parseInt(req.params.id)
         const result = await con.query("SELECT * FROM Choix WHERE idElection=?", [id], function(error, results, fields) {
             res.json(results)

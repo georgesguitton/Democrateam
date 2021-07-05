@@ -64,7 +64,7 @@ const app = new Vue({
             this.elections = res.data
         },
         async getElection(id) {
-            const res = await axios.get('/api/getElection/' + id)
+            const res = await axios.get('/api/getCandidat/' + id)
             this.election.info = this.elections.find(election => election.idElection === id)
             this.election.candidat = res.data
             router.push('/PageElection')
@@ -136,7 +136,7 @@ const app = new Vue({
         async creationElection(information){
           const id = await axios.post('/api/creerElection', information)
           console.log(id.data)
-          const res = await axios.get('/api/getElection/' + id.data)
+          const res = await axios.get('/api/getCandidat/' + id.data)
           this.candidats=res.data
           router.push('/ajoutCandidat')
         },
