@@ -67,18 +67,27 @@ Other web browsers have not been tested yet and may cause issues when operating 
 
 On your web browser enter the following URL : ######
 
+*   Create an account
+    
+
+In order to create an account, select the "connection" tab.  
+Click on "créer un compte" and fill the form with your personal informations.  
+Once you filled everything, click on "s'inscrire".  
+Your account has been created.
+
 *   Participate in an election
     
 
-In order to participate in an election, you will need to create an account with your personal informations by clicking on the "connection" tab.  
-To participate in government organised elections, you will also need to enter your national elector number.  
-Once logged in, click on the "Election" tab, select the election you wish to vote in and enter your vote.  
+In order to participate in an election, you will need connect to your account via "connection" tab or create a new one.  
+Once logged in, click on the "Election" tab.  
+Select the election you wish to vote in and enter your vote.  
 Your vote has been sent.
 
 *   Create an election
     
 
-In order to create an election, select the "Creer une election" tab.  
+In order to create an election, you will need connect to your account via "connection" tab or create a new one.  
+Select the "Creer une election" tab.  
 Enter the number of candidates of your election.  
 Fill the forms with information about each candidate and validate the election once you are done.  
 Your election has been created.
