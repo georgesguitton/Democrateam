@@ -1,8 +1,8 @@
 <template>
   <div>
     <navbar :connected="connected" @log-out="logOut"></navbar>
-    <form @submit.prevent="updateCandidat">
-      <div v-for="candidat in candidats" :key="candidat.idChoix" class="col-12">
+    <form @submit.prevent="updateCandidat" class="text-center">
+      <div v-for="candidat in candidats" :key="candidat.idChoix" class="col-12 text-center">
         <label>Nom du candidat</label>
         <input v-model="candidat.libelle" type="text" placeholder="Nom candidat" name="" required />
 

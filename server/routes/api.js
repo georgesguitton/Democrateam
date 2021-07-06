@@ -273,4 +273,24 @@ router.put('/updateCandidats', async (req, res) => {
     }
 })
 
+router.post('/addParticipant', async (req, res) => {
+    const email = ""
+    const idElection = 0
+    if(req.session.userId) {
+        await con.query("SELECT idUtilisateur FROM utilisateur WHERE emailPerso = ? OR emailPro = ?",[email,email],async function(error, results, fields){
+            if (results[0] != null) {
+                const idUtilisateur = results[0].idUtilisateur
+                await con.query("INSERT INTO `participant`(`idElection`, `idUtilisateur`, `aVote`) VALUES (?,?,0)",[idElection,idUtilisateur],async function(error, results, fields){
+
+                })
+            }
+            else{
+                console.log("NO USER with this mail")
+            }
+        })
+
+    }
+
+})
+
 module.exports = router
