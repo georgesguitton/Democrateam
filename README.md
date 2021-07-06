@@ -78,7 +78,7 @@ Your account has been created.
 *   Participate in an election
     
 
-In order to participate in an election, you will need connect to your account via "connection" tab or create a new one.  
+In order to participate in an election, you will need to connect to your account via the "connection" tab or create a new one.  
 Once logged in, click on the "Election" tab.  
 Select the election you wish to vote in and enter your vote.  
 Your vote has been sent.
@@ -86,11 +86,19 @@ Your vote has been sent.
 *   Create an election
     
 
-In order to create an election, you will need connect to your account via "connection" tab or create a new one.  
+In order to create an election, you will need to connect to your account via the "connection" tab or create a new one.  
 Select the "Creer une election" tab.  
 Enter the number of candidates of your election.  
 Fill the forms with information about each candidate and validate the election once you are done.  
 Your election has been created.
+
+*   Contact us
+    
+
+In order to contact us, you will need to connect to your account via the "connection" tab or create a new one.  
+Select the "contact" tab.  
+Fill the form with the required informations and click on "envoyer".  
+Your message has been sent to us.
 
 4\. Contributors
 ----------------
