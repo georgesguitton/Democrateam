@@ -99,7 +99,7 @@ router.post('/logout', (req, res) => {
 router.post('/register', async(req, res) => {
     const email = req.body.username.toLowerCase();
     const password = req.body.password
-    var emailPro = req.body.workmail
+    var emailPro = req.body.workmail.toLowerCase()
     const lastname = req.body.lastname
     const firstname = req.body.firstname
 
@@ -274,13 +274,14 @@ router.put('/updateCandidats', async (req, res) => {
 })
 
 router.post('/addParticipant', async (req, res) => {
-    const email = ""
-    const idElection = 0
+    const email = req.body.email.toLowerCase()
+    console.log(email)
+    const idElection = req.body.id
     if(req.session.userId) {
         await con.query("SELECT idUtilisateur FROM utilisateur WHERE emailPerso = ? OR emailPro = ?",[email,email],async function(error, results, fields){
             if (results[0] != null) {
                 const idUtilisateur = results[0].idUtilisateur
-                await con.query("INSERT INTO `participant`(`idElection`, `idUtilisateur`, `aVote`) VALUES (?,?,0)",[idElection,idUtilisateur],async function(error, results, fields){
+                await con.query("INSERT INTO `participant`(`idElection`, `idUtilisateur`, `aVote`) VALUES (?,?,FALSE)",[idElection,idUtilisateur],async function(error, results, fields){
 
                 })
             }

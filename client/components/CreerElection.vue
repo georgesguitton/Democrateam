@@ -60,6 +60,11 @@ module.exports = {
       type: Boolean
     },
   },
+  async mounted() {
+      if (!this.connected){
+        this.$router.push('/login')
+      }
+  },
   data() {
     return {
       creationElection: {

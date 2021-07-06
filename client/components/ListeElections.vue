@@ -77,6 +77,9 @@ module.exports = {
     return {};
   },
   async mounted() {
+    if (!this.connected){
+      this.$router.push('/login')
+    }
     this.$emit('get-elections')
     this.$emit('get-inscriptions')
   },

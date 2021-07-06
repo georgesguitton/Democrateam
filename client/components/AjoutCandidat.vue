@@ -37,6 +37,9 @@ module.exports = {
     };
   },
   async mounted() {
+    if (!this.connected){
+      this.$router.push('/login')
+    }
   },
   methods: {
     logOut() {
@@ -44,7 +47,7 @@ module.exports = {
     },
     updateCandidat() {
       this.$emit("update-candidats",this.candidats)
-      this.$router.push('/')
+      this.$router.push('/ajoutParticipant')
     },
   },
 };

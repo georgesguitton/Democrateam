@@ -9,6 +9,7 @@ const Profil = window.httpVueLoader('./components/Profil.vue')
 const Thankyou = window.httpVueLoader('./components/Thankyou.vue')
 const AjoutCandidat = window.httpVueLoader('./components/AjoutCandidat.vue')
 const Vote = window.httpVueLoader('./components/Vote.vue')
+const AjoutParticipant = window.httpVueLoader('./components/AjoutParticipant.vue')
 const routes = [
     { path: '/', component: Home },
     { path: '/listeElections', component: ListeElections },
@@ -20,6 +21,7 @@ const routes = [
     { path: '/thankyou', component: Thankyou },
     { path: '/register', component: Register },
     { path: '/ajoutCandidat', component: AjoutCandidat },
+    { path: '/ajoutParticipant', component: AjoutParticipant },
     { path: '/vote', component: Vote },
 
 ]
@@ -34,6 +36,10 @@ const app = new Vue({
     data: {
         elections: [],
         inscriptions: [],
+        ajoutParticipant:{
+            id:0,
+            email:""
+        },
         candidats:[],
         election: {
             info: [],
@@ -136,6 +142,7 @@ const app = new Vue({
         async creationElection(information){
           const id = await axios.post('/api/creerElection', information)
           console.log(id.data)
+          this.ajoutParticipant.id = id.data
           const res = await axios.get('/api/getCandidat/' + id.data)
           this.candidats=res.data
           router.push('/ajoutCandidat')
