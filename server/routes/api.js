@@ -17,9 +17,9 @@ class User {
 router.get('/', (req, res) => res.send('Hello World!'))
 
 router.get('/inscriptions', async(req, res) => {
-    console.log(req.session.userId)
+    //console.log(req.session.userId)
     if (req.session.userId) {
-        const result = await con.query('SELECT * FROM inscriptionDispo', function(error, results, fields) {
+        const result = await con.query('SELECT * FROM inscriptionDispo WHERE idTypeElection NOT IN (SELECT idTypeElection FROM inscrit WHERE idUtilisateur = ?)',[req.session.userId], function(error, results, fields) {
             res.json(results)
         })
     } else {
@@ -290,6 +290,25 @@ router.post('/addParticipant', async (req, res) => {
             }
         })
 
+    }
+
+})
+
+router.post('/inscrireElection', async (req, res) => {
+    console.log(req.body.idElection)
+    const idTypeElection = req.body.idElection
+
+    if(req.session.userId){
+        await con.query("SELECT numElecteur FROM utilisateur WHERE idUtilisateur = ?",[req.session.userId],async function(error, results, fields){
+            if(results[0].numElecteur != null){
+                await con.query("INSERT INTO `inscrit` (`idTypeElection`, `idUtilisateur`) VALUES (?,?)",[idTypeElection,req.session.userId],async function(error, results, fields){
+                })
+                return res.json({ message: 'User registered' })
+            }
+            else{
+                return res.status(400).json({ message: 'numElecteur not shared' })
+            }
+        })
     }
 
 })

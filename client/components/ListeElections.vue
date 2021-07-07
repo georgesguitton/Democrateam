@@ -7,7 +7,7 @@
     <div v-if="inscriptions !== null">
       <h3 class="text-center">Elections auxquelles vous pouvez vous inscrire à distance</h3>
       <div class="row">
-        <div v-for="inscription in inscriptions" :key="inscription.idTypeElection" class="col-lg-4 col-md-6 col-12 mb-3" @click="">
+        <div v-for="inscription in inscriptions" :key="inscription.idTypeElection" class="col-lg-4 col-md-6 col-12 mb-3" @click="inscrireElection(inscription.idTypeElection)">
           <div class="hover hover-2 text-white rounded">
             <img src="../images/Box.png" alt="" />
             <div class="hover-overlay"></div>
@@ -74,7 +74,11 @@ module.exports = {
     },
   },
   data() {
-    return {};
+    return {
+      inscritElection :{
+        idElection : 0
+      },
+    };
   },
   async mounted() {
     if (!this.connected){
@@ -92,6 +96,19 @@ module.exports = {
     },
     afficherElection(id) {
       this.$emit("get-election", id);
+    },
+    async inscrireElection(id){
+      this.inscritElection.idElection = id
+      const res = await axios.post('/api/inscrireElection', this.inscritElection).catch(function(error) {
+          if (error.response.status === 400) {
+              alert("Veuillez fournir votre N° d'électeur pour vous inscrire")
+              router.push('/profil')
+              return error.response;
+          }
+      })
+      if(res.status === 200){
+          this.$emit('get-inscriptions')
+      }
     },
   },
 };
