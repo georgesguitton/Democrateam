@@ -25,8 +25,9 @@
 <body>
     <div id="app">
         <main>
-            <router-view :types="types" :elections="elections" :election="election" :connected="connected" :user="user" :ajoutParticipant="ajoutParticipant" :participants="participants" :inscriptions="inscriptions" :candidats="candidats" @update-candidats="updateCandidats" @creation-election="creationElection" @get-inscriptions="getInscriptions" @get-elections="getElections" @get-election="getElection" @log-in="logIn"
-                @log-out="logOut" @edit-password="editPassword" @change-participants="changeParticipants" @voter="voter" @get-types="getTypes"></router-view>
+            <router-view :types="types" :elections="elections" :election="election" :connected="connected" :user="user" :ajoutParticipant="ajoutParticipant" :participants="participants" :inscriptions="inscriptions" :candidats="candidats" @update-candidats="updateCandidats"
+                @creation-election="creationElection" @get-inscriptions="getInscriptions" @get-elections="getElections" @get-election="getElection" @log-in="logIn" @log-out="logOut" @edit-password="editPassword" @edit-infos="editInfos" @change-participants="changeParticipants"
+                @voter="voter" @get-types="getTypes"></router-view>
         </main>
     </div>
     <script src="/vue-application.js"></script>

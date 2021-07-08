@@ -20,7 +20,7 @@
         <div class="col-lg-6">
           <div class="h-100 p-md-5 p-2 bg-light">
             <h2 class="text-justify col-12">Mes informations</h2>
-            <form class="col-12">
+            <form class="col-12" @submit.prevent="editInfos">
               <div class="form-group">
                 <label for="userid">Identifiant</label>
                 <input
@@ -29,7 +29,15 @@
                   class="form-control"
                   id="userid"
                   aria-describedby="userid"
+                  v-if="user.electorId"
                   disabled
+                />
+                <input type="text"
+                  v-model="tmpElectorId"
+                  class="form-control"
+                  id="userid"
+                  aria-describedby="userid"
+                  v-else
                 />
               </div>
               <div class="form-group">
@@ -58,6 +66,17 @@
                   class="form-control"
                   id="useremail"
                 />
+              </div>
+              <div>
+                <p id="errorEditInfosMessage"></p>
+              </div>
+              <div>
+                <p id="successEditInfosMessage"></p>
+              </div>
+              <div class="form-group">
+                <button id="sendinfo" type="submit" class="btn btn-primary">
+                  Modifier les informations
+                </button>
               </div>
             </form>
           </div>
@@ -140,6 +159,7 @@ module.exports = {
         newPassword: "",
         confirmPassword: "",
       },
+      tmpElectorId: "",
     };
   },
   methods: {
@@ -152,16 +172,21 @@ module.exports = {
     editPassword() {
       this.$emit("edit-password", this.editingPassword);
     },
+    editInfos() {
+      this.$emit("edit-infos", this.user, this.tmpElectorId);
+    },
   },
 };
 </script>
 
 <style scoped>
-#errorEditPasswordMessage {
+#errorEditPasswordMessage,
+#errorEditInfosMessage {
   color:red;
 }
 
-#successEditPasswordMessage {
+#successEditPasswordMessage,
+#successEditInfosMessage {
   color: rgb(0, 179, 39)
 }
 </style>

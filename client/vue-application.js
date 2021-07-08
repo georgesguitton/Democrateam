@@ -41,12 +41,12 @@ const app = new Vue({
             id:0,
             email:""
         },
-        candidats:[],
+        candidats: [],
         election: {
             info: [],
             candidat: []
         },
-        participants :0,
+        participants: 0,
         /*creationElection: {
             data: {},
             candidats: []
@@ -127,7 +127,7 @@ const app = new Vue({
             router.push('/CreerElection')
             router.push('/FormulaireElection')
         },
-        async voter(selected){
+        async voter(selected) {
             await axios.post('/api/voter/', selected)
             this.election = []
             router.push('/')
@@ -159,28 +159,49 @@ const app = new Vue({
                 document.getElementById('successEditPasswordMessage').innerHTML = "Mot de passe modifié avec succès.";
             }
         },
-        async creationElection(information){
-          const id = await axios.post('/api/creerElection', information)
-          console.log(id.data)
-          this.ajoutParticipant.id = id.data
-          const res = await axios.get('/api/getCandidat/' + id.data)
-          this.candidats=res.data
-          router.push('/ajoutCandidat')
+        async editInfos(userInfo, electorId) {
+            const userInfos = await axios.get('/api/user/')
+                .catch(function(error) {
+                    console.log(error.response);
+                })
+            console.log(userInfo)
+            if (userInfos.data.numElecteur == null && electorId != "") {
+                userInfo.electorId = electorId
+            }
+            const editUserInfos = await axios.put('/api/editUserInfos/', userInfo)
+                .catch(function(error) {
+                    document.getElementById('errorEditInfosMessage').innerHTML = "Une erreur est survenue.";
+                    document.getElementById('successEditInfosMessage').innerHTML = "";
+                    console.log(error)
+                    return error.response;
+                })
+            if (editUserInfos.status === 200) {
+                document.getElementById('errorEditInfosMessage').innerHTML = "";
+                document.getElementById('successEditInfosMessage').innerHTML = "Informations modifiées avec succès.";
+            }
+        },
+        async creationElection(information) {
+            const id = await axios.post('/api/creerElection', information)
+            console.log(id.data)
+            this.ajoutParticipant.id = id.data
+            const res = await axios.get('/api/getCandidat/' + id.data)
+            this.candidats = res.data
+            router.push('/ajoutCandidat')
         },
 
-        async updateCandidats(candidats){
-          const res = await axios.put('/api/updateCandidats',candidats)
+        async updateCandidats(candidats) {
+            const res = await axios.put('/api/updateCandidats', candidats)
         },
-      /*  async creationElection(creationElection) {
-            if (await axios.post('/api/FormulaireElection/')
-                .catch(function(error) {
-                    if (error.response.status === 400 || error.response.status === 401) {
-                        console.log(error)
-                    }
-                }))
-            {
-                router.push('/')
-            }
-        }, */
+        /*  async creationElection(creationElection) {
+              if (await axios.post('/api/FormulaireElection/')
+                  .catch(function(error) {
+                      if (error.response.status === 400 || error.response.status === 401) {
+                          console.log(error)
+                      }
+                  }))
+              {
+                  router.push('/')
+              }
+          }, */
     }
 })

@@ -43,10 +43,21 @@ router.get('/me', async (req, res) => {
   return
 })
 
+router.get('/user', async(req, res) => {
+    if (req.session.userId) {
+        const result = await con.query('SELECT * FROM utilisateur WHERE idUtilisateur = ?', [req.session.userId], function(error, results, fields) {
+            res.json(results)
+        })
+    } else {
+        res.json(null)
+    }
+
+})
+
 router.get('/inscriptions', async(req, res) => {
     //console.log(req.session.userId)
     if (req.session.userId) {
-        const result = await con.query('SELECT * FROM inscriptionDispo WHERE idTypeElection NOT IN (SELECT idTypeElection FROM inscrit WHERE idUtilisateur = ?)',[req.session.userId], function(error, results, fields) {
+        const result = await con.query('SELECT * FROM inscriptionDispo WHERE idTypeElection NOT IN (SELECT idTypeElection FROM inscrit WHERE idUtilisateur = ?)', [req.session.userId], function(error, results, fields) {
             res.json(results)
         })
     } else {
@@ -151,25 +162,23 @@ router.post('/register', async(req, res) => {
     })
 })
 
-router.post('/voter', async (req, res) => {
-    if(req.session.userId) {
-        const voteCandidat= req.body.id
-        const idElection =req.body.idElection
+router.post('/voter', async(req, res) => {
+    if (req.session.userId) {
+        const voteCandidat = req.body.id
+        const idElection = req.body.idElection
 
-        await con.query('SELECT * FROM electiondispoutilisateur WHERE Participant =? AND idElection =?', [req.session.userId,idElection], async function(error, results, fields) {
+        await con.query('SELECT * FROM electiondispoutilisateur WHERE Participant =? AND idElection =?', [req.session.userId, idElection], async function(error, results, fields) {
             if (results[0] != null) {
 
-              await con.query("UPDATE choix SET nbVotant = nbvotant+1 WHERE idChoix= ?",[voteCandidat],async function(error, results, fields){
-              })
+                await con.query("UPDATE choix SET nbVotant = nbvotant+1 WHERE idChoix= ?", [voteCandidat], async function(error, results, fields) {})
 
-              await con.query("UPDATE participant SET aVote = TRUE WHERE idUtilisateur= ? AND idElection=?",[req.session.userId, idElection],async function(error, results, fields){
-                  res.send('ok')
-              })
-            }
-            else{
-              res.status(401).json({
-                  message: 'user already voted for this election or election the election already end'
-              })
+                await con.query("UPDATE participant SET aVote = TRUE WHERE idUtilisateur= ? AND idElection=?", [req.session.userId, idElection], async function(error, results, fields) {
+                    res.send('ok')
+                })
+            } else {
+                res.status(401).json({
+                    message: 'user already voted for this election or election the election already end'
+                })
             }
         })
     }
@@ -203,6 +212,55 @@ router.put('/editPassword', async(req, res) => {
         }
     })
 })
+
+/**
+ * Cette route permet de modifier les informations de l'utilisateur connecté.
+ */
+router.put('/editUserInfos', async(req, res) => {
+    const electorId = req.body.electorId
+    const email = req.body.email
+    const emailPro = req.body.emailPro
+    const firstname = req.body.firstname
+    const lastname = req.body.lastname
+    console.log(req.session.userId)
+
+    await con.query('SELECT * FROM Utilisateur WHERE idUtilisateur=?', [req.session.userId], async function(error, results, fields) {
+        if (results[0].numElecteur == null || results[0].numElecteur == "") {
+            await con.query('UPDATE utilisateur SET numElecteur=? WHERE idUtilisateur=?', [electorId, req.session.userId], async function(error, results, fields) {
+                    console.log('numElecteur modified')
+                })
+                // on envoie le user au client.
+        }
+
+        await con.query('UPDATE utilisateur SET emailPerso=? WHERE idUtilisateur=?', [email, req.session.userId], async function(error, results, fields) {
+            console.log('emailPerso modified')
+        })
+
+        await con.query('UPDATE utilisateur SET prenom=? WHERE idUtilisateur=?', [firstname, req.session.userId], async function(error, results, fields) {
+            console.log('prenom modified')
+        })
+
+        await con.query('UPDATE utilisateur SET nom=? WHERE idUtilisateur=?', [lastname, req.session.userId], async function(error, results, fields) {
+            console.log('nom modified')
+        })
+    })
+
+    await con.query('SELECT * FROM Utilisateur WHERE idUtilisateur=?', [req.session.userId], async function(error, results, fields) {
+        const user = {
+            email: results[0].emailPerso,
+            emailPro: results[0].emailPro,
+            lastname: results[0].nom,
+            firstname: results[0].prenom,
+            electorId: results[0].numElecteur
+        }
+        req.session.user.user = user;
+        // on envoie le user au client.
+
+        return res.json(req.session.user.user)
+    })
+})
+
+
 /*
 router.post('/addCandidat', async (req, res) => {
     const idElection = req.body.idElection
@@ -251,7 +309,7 @@ router.post('/FormulaireElection', async (req, res) => {
 })
 */
 
-router.post('/creerElection', async (req, res) => {
+router.post('/creerElection', async(req, res) => {
     //console.log("Creation election")
 
     const idUtilisateur = req.session.userId
@@ -264,51 +322,49 @@ router.post('/creerElection', async (req, res) => {
     const typeElection = req.body.data.typeElection
     const numCandidat = req.body.data.participants
 
-    console.log(nomElection+" "+descriptionElection+" "+dateDebut+" "+dateFin+" "+imageElection+" "+typeElection+" "+numCandidat)
+    console.log(nomElection + " " + descriptionElection + " " + dateDebut + " " + dateFin + " " + imageElection + " " + typeElection + " " + numCandidat)
     var numElection
 
-    if(req.session.userId) {
-        await con.query("INSERT INTO `election`(`titre`, `description`, `dateDebut`, `dateFin`, `urlImage`,`idUtilisateur`,`idTypeElection`) VALUES (?,?,?,?,?,?,?)",[nomElection,descriptionElection,dateDebut,dateFin,imageElection,idUtilisateur,typeElection],async function(error, results, fields){
+    if (req.session.userId) {
+        await con.query("INSERT INTO `election`(`titre`, `description`, `dateDebut`, `dateFin`, `urlImage`,`idUtilisateur`,`idTypeElection`) VALUES (?,?,?,?,?,?,?)", [nomElection, descriptionElection, dateDebut, dateFin, imageElection, idUtilisateur, typeElection], async function(error, results, fields) {
             //console.log(results)
             numElection = results.insertId
-            //console.log(numElection)
+                //console.log(numElection)
             for (var i = 0; i < numCandidat; i++) {
-                await con.query("INSERT INTO `choix`(`libelle`, `urlImage`, `description`, `nbVotant`, `lienInfo`,`idElection`) VALUES ('','','',0,'',?)",[numElection],async function(error, results, fields){
-                })
+                await con.query("INSERT INTO `choix`(`libelle`, `urlImage`, `description`, `nbVotant`, `lienInfo`,`idElection`) VALUES ('','','',0,'',?)", [numElection], async function(error, results, fields) {})
             }
             res.json(numElection)
         })
     }
 })
 
-router.put('/updateCandidats', async (req, res) => {
-    if(req.session.userId) {
+router.put('/updateCandidats', async(req, res) => {
+    if (req.session.userId) {
         console.log(req.body)
         candidats = req.body
-        console.log("UPDATE candidats "+candidats.length)
-        for(var i=0;i<candidats.length;i++){
-          const idChoix = candidats[i].idChoix
-          const libelle = candidats[i].libelle
-          const description = candidats[i].description
-          const lienInfo = candidats[i].lienInfo
-          const urlImage = candidats[i].urlImage
-          await con.query("UPDATE `choix` SET `libelle`=?,`urlImage`=?,`description`=?,`lienInfo`=? WHERE idChoix=?",[libelle,urlImage,description,lienInfo,idChoix],async function(error, results, fields){
-          })
+        console.log("UPDATE candidats " + candidats.length)
+        for (var i = 0; i < candidats.length; i++) {
+            const idChoix = candidats[i].idChoix
+            const libelle = candidats[i].libelle
+            const description = candidats[i].description
+            const lienInfo = candidats[i].lienInfo
+            const urlImage = candidats[i].urlImage
+            await con.query("UPDATE `choix` SET `libelle`=?,`urlImage`=?,`description`=?,`lienInfo`=? WHERE idChoix=?", [libelle, urlImage, description, lienInfo, idChoix], async function(error, results, fields) {})
         }
 
 
     }
 })
 
-router.post('/addParticipant', async (req, res) => {
+router.post('/addParticipant', async(req, res) => {
     const email = req.body.email.toLowerCase()
     console.log(email)
     const idElection = req.body.id
-    if(req.session.userId) {
-        await con.query("SELECT idUtilisateur FROM utilisateur WHERE emailPerso = ? OR emailPro = ?",[email,email],async function(error, results, fields){
+    if (req.session.userId) {
+        await con.query("SELECT idUtilisateur FROM utilisateur WHERE emailPerso = ? OR emailPro = ?", [email, email], async function(error, results, fields) {
             if (results[0] != null) {
                 const idUtilisateur = results[0].idUtilisateur
-                await con.query("INSERT INTO `participant`(`idElection`, `idUtilisateur`, `aVote`) VALUES (?,?,FALSE)",[idElection,idUtilisateur],async function(error, results, fields){
+                await con.query("INSERT INTO `participant`(`idElection`, `idUtilisateur`, `aVote`) VALUES (?,?,FALSE)", [idElection, idUtilisateur], async function(error, results, fields) {
 
                 })
                 return res.json({ message: 'User added' })
@@ -323,18 +379,16 @@ router.post('/addParticipant', async (req, res) => {
 
 })
 
-router.post('/inscrireElection', async (req, res) => {
+router.post('/inscrireElection', async(req, res) => {
     console.log(req.body.idElection)
     const idTypeElection = req.body.idElection
 
-    if(req.session.userId){
-        await con.query("SELECT numElecteur FROM utilisateur WHERE idUtilisateur = ?",[req.session.userId],async function(error, results, fields){
-            if(results[0].numElecteur != null){
-                await con.query("INSERT INTO `inscrit` (`idTypeElection`, `idUtilisateur`) VALUES (?,?)",[idTypeElection,req.session.userId],async function(error, results, fields){
-                })
+    if (req.session.userId) {
+        await con.query("SELECT numElecteur FROM utilisateur WHERE idUtilisateur = ?", [req.session.userId], async function(error, results, fields) {
+            if (results[0].numElecteur != null) {
+                await con.query("INSERT INTO `inscrit` (`idTypeElection`, `idUtilisateur`) VALUES (?,?)", [idTypeElection, req.session.userId], async function(error, results, fields) {})
                 return res.json({ message: 'User registered' })
-            }
-            else{
+            } else {
                 return res.status(400).json({ message: 'numElecteur not shared' })
             }
         })
