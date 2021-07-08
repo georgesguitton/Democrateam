@@ -59,6 +59,21 @@ const app = new Vue({
         const res = await axios.get('/api/elections')
         this.elections = res.data
             //Fin test
+        try {
+          const res2 = await axios.get('/api/me')
+          this.user = res2.data
+          this.connected = true
+          console.log('connected')
+        }
+        catch (erreur) {
+          if (erreur.response.status === 401) {
+            this.connected = false
+          }
+          else {
+              console.log('erreur', erreur)
+          }
+        }
+        router.push('/')
 
     },
     methods: {

@@ -16,6 +16,33 @@ class User {
 /* --- TEST CONNECTION BD */
 router.get('/', (req, res) => res.send('Hello World!'))
 
+router.get('/me', async (req, res) => {
+  if(req.session.userId){
+    await con.query('SELECT * FROM utilisateur WHERE idUtilisateur=?',[req.session.userId], async function(error, results, fields) {
+        //console.log(results[0])
+        req.session.userId = results[0].idUtilisateur
+        console.log(req.session.userId)
+        req.session.user = new User()
+        const user = {
+            email: results[0].emailPerso,
+            emailPro: results[0].emailPro,
+            lastname: results[0].nom,
+            firstname: results[0].prenom,
+            electorId: results[0].numElecteur
+        }
+        req.session.user.user = user;
+            // on envoie le user au client.
+
+        return res.json(req.session.user.user)
+      })
+  }
+  else{
+    res.status(401).json({ message: 'Not connected' })
+  }
+
+  return
+})
+
 router.get('/inscriptions', async(req, res) => {
     //console.log(req.session.userId)
     if (req.session.userId) {

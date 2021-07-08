@@ -127,6 +127,12 @@ module.exports = {
     connected: { type: Boolean },
     user: { type: Object },
   },
+  async mounted() {
+    if (!this.connected){
+      this.$router.push('/')
+    }
+
+  },
   data() {
     return {
       editingPassword: {

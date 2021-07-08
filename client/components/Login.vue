@@ -66,6 +66,12 @@ module.exports = {
       },
     };
   },
+  async mounted() {
+    if (this.connected){
+      this.$router.push('/')
+    }
+
+  },
   methods: {
     logIn() {
       this.$emit("log-in", this.user);
