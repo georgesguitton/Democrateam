@@ -7,7 +7,7 @@
     <form class="card form-creer" @submit.prevent="addParticipant">
       <div class="form-group">
         <label>E-mail du participant</label>
-        <input v-model="ajoutparticipant.email" type="text" placeholder="Nom candidat" name="" required />
+        <input v-model="ajoutparticipant.email" type="text" placeholder="Email" name="" required />
       </div>
       <button class="btn btn-primary btn-login" type="submit">
         Ajouter le participant

@@ -22,7 +22,7 @@
       </div>
 
       <!-- Masthead Subheading-->
-      <p class="masthead-subheading font-weight-light mb-0"> Du {{election.info.dateDebut.substr(-200,10)}} au {{election.info.dateFin}} </p>
+      <p class="masthead-subheading font-weight-light mb-0"> Du {{election.info.dateDebut.substr(-200,10)}} au {{election.info.dateFin.substr(-200,10)}} </p>
 
     </svg>
   </header>

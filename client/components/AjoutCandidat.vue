@@ -20,7 +20,7 @@
         </div>
         <div class="form-group">
           <label>Url image</label>
-          <input v-model="candidat.urlImage" type="text" placeholder="Nom candidat" name="" required />
+          <input v-model="candidat.urlImage" type="text" placeholder="Url de l'image" name="" required />
       </div>
       </div>
       <button class="btn btn-primary btn-login" type="submit">
