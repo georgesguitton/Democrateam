@@ -36,6 +36,7 @@ const app = new Vue({
     data: {
         elections: [],
         inscriptions: [],
+        types: [],
         ajoutParticipant:{
             id:0,
             email:""
@@ -68,6 +69,10 @@ const app = new Vue({
         async getElections() {
             const res = await axios.get('/api/elections')
             this.elections = res.data
+        },
+        async getTypes() {
+          const res = await axios.get('/api/typeElections')
+          this.types = res.data
         },
         async getElection(id) {
             const res = await axios.get('/api/getCandidat/' + id)

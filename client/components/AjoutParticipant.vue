@@ -36,8 +36,18 @@ module.exports = {
       this.$emit("log-out");
     },
     async addParticipant() {
-      const res = await axios.post('/api/addParticipant', this.ajoutparticipant)
-      this.ajoutparticipant.email=""
+
+      const res = await axios.post('/api/addParticipant', this.ajoutparticipant).catch(function(error) {
+      if (error.response.status === 400) {
+              alert("Pas d'email associé à un utilisateur")
+              return error.response;
+          }
+      })
+      if(res.status === 200){
+          this.ajoutparticipant.email=""
+      }
+
+
     },
   },
 };

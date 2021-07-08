@@ -30,7 +30,11 @@
             </div>
             <div class="form-group">
               <label>Type de l'élection</label>
-              <input v-model="creationElection.data.typeElection" type="number" placeholder="Entrez le type de l'élection" name="nom_election" required />
+              <select v-model="creationElection.data.typeElection">
+                  <option v-for="type in types" :value="type.idTypeElection">
+                      {{type.titre}}
+                  <option>
+              </select>
             </div>
 
 
@@ -59,10 +63,14 @@ module.exports = {
     connected: {
       type: Boolean
     },
+    types: { type: Array, default: [] },
   },
   async mounted() {
       if (!this.connected){
         this.$router.push('/login')
+      }
+      else{
+        this.$emit("get-types")
       }
   },
   data() {

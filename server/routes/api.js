@@ -284,9 +284,11 @@ router.post('/addParticipant', async (req, res) => {
                 await con.query("INSERT INTO `participant`(`idElection`, `idUtilisateur`, `aVote`) VALUES (?,?,FALSE)",[idElection,idUtilisateur],async function(error, results, fields){
 
                 })
+                return res.json({ message: 'User added' })
             }
             else{
                 console.log("NO USER with this mail")
+                return res.status(400).json({ message: 'No user with this email' })
             }
         })
 
@@ -311,6 +313,25 @@ router.post('/inscrireElection', async (req, res) => {
         })
     }
 
+})
+
+router.get('/typeElections', async(req, res) => {
+    console.log("Get type election")
+    if(req.session.userId){
+        await con.query("SELECT typeUtilisateur FROM utilisateur WHERE idUtilisateur = ?",[req.session.userId],async function(error, results, fields){
+            console.log(results)
+            if(results[0].typeUtilisateur == 1){
+              await con.query("SELECT * FROM `typeelection`",async function(error, results, fields){
+                  res.json(results)
+              })
+            }
+            else{
+              await con.query("SELECT * FROM `typeelection` WHERE idTypeElection = 1 or idTypeElection = 2",async function(error, results, fields){
+                  res.json(results)
+              })
+            }
+        })
+    }
 })
 
 module.exports = router
