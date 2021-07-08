@@ -264,7 +264,6 @@ body {
 }
 
 #creer {
-    height: calc(100vh - 20px);
     display: flex;
     align-items: center;
     font-family: "Montserrat", sans-serif;
@@ -290,7 +289,7 @@ body {
     text-align: center;
 }
 
-#creer input[type="text"], #creer input[type="number"], #creer textarea, .contener-election input[type="text"], .contener-election textarea {
+#creer input[type="text"], #creer input[type="number"],#creer input[type="date"],#creer select, #creer textarea, .contener-election input[type="text"], .contener-election textarea {
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;

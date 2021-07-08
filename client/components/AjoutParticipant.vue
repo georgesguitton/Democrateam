@@ -1,14 +1,21 @@
 <template>
   <div>
     <navbar :connected="connected" @log-out="logOut"></navbar>
-    <form @submit.prevent="addParticipant">
-      <label>E-mail du participant</label>
-      <input v-model="ajoutparticipant.email" type="text" placeholder="Nom candidat" name="" required />
-
+    <section id="creer" class="container col-12 form1-creer">
+      <div class="row justify-content-center">
+        <div id="container" class="col-md-6 col-sm-8 col-lg-5 col-xl-4">
+    <form class="card form-creer" @submit.prevent="addParticipant">
+      <div class="form-group">
+        <label>E-mail du participant</label>
+        <input v-model="ajoutparticipant.email" type="text" placeholder="Nom candidat" name="" required />
+      </div>
       <button class="btn btn-primary btn-login" type="submit">
         Ajouter le participant
       </button>
     </form>
+        </div>
+      </div>
+    </section>
   </div>
 </template>
 

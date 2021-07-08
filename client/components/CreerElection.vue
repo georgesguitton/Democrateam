@@ -30,14 +30,12 @@
             </div>
             <div class="form-group">
               <label>Type de l'élection</label>
-              <select v-model="creationElection.data.typeElection">
+              <select v-model="creationElection.data.typeElection" required>
                   <option v-for="type in types" :value="type.idTypeElection">
                       {{type.titre}}
                   <option>
               </select>
             </div>
-
-
             <div class="form-group">
               <label>Nombre de candidats</label>
               <input v-model="creationElection.data.participants" type="number" min="1" max="20" placeholder="Nombre de candidats à l'élection" name="nom_election" required />
